@@ -1,0 +1,23 @@
+<h1>Welkom, Meneer {{ user.meta.firstname }}</h1>
+<p>U bent een {{ user.role.label }}.</p>
+
+
+{{!-- test --}}
+
+<h4>De klassen</h4>
+{{#each user.class}}
+<li> {{ this.label }}</li>
+{{/each}}
+
+{{!-- test --}}
+<h4>Class {{ Class.label }}</h4>
+{{#each Class.users }}
+<li> {{ this.meta.firstname }}</li>
+{{/each}}
+
+
+{{!-- test --}}
+<div class="logo"><img src="{{ user.meta.avatar }}" alt=""></div>
+{{!-- test --}}
+
+
