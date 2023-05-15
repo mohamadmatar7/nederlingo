@@ -3,7 +3,7 @@
  */
 
 import DataSource from "../../lib/DataSource.js";
-
+import { ILike } from 'typeorm';
 export const getUsers = async (req, res, next) => {
   try {
     // get the repository
@@ -20,7 +20,6 @@ export const getUsers = async (req, res, next) => {
   }
 };
 
-
 export const getUser = async (req, res, next) => {
   try {
     // get the repository
@@ -36,6 +35,7 @@ export const getUser = async (req, res, next) => {
     next(e.message);
   }
 };
+
 
 export const deleteUser = async (req, res, next) => {
   try {
@@ -82,6 +82,47 @@ export const updateUser = async (req, res, next) => {
     next(e);
   }
 };
+
+
+
+// export const getUserByFirstName = async (req, res, next) => {
+//   try {
+//     // get the repository
+//     const userRepository = DataSource.getRepository("User");
+//     const firstName = req.params.firstname.toLowerCase(); 
+
+//     res.status(200).json(
+//       await userRepository.find({
+//         where: { meta: { firstname: ILike(`%${firstName}%`) } },
+//         relations: ["meta", "role", "class",],
+//       })
+//     );
+//   } catch (e) {
+//     next(e.message);
+//   }
+// };
+
+
+export const getUserByFirstName = async (req, res, next) => {
+  try {
+    // get the repository
+    const userRepository = DataSource.getRepository("User");
+    const firstName = req.params.firstname.toLowerCase();
+
+    res.status(200).json(
+      await userRepository.createQueryBuilder("user")
+        .leftJoinAndSelect("user.meta", "meta")
+        .where("UPPER(meta.firstname) LIKE :firstName", { firstName: `%${firstName}%` })
+        .leftJoinAndSelect("user.role", "role")
+        .leftJoinAndSelect("user.class", "class")
+        .getMany()
+    );
+  } catch (e) {
+    next(e.message);
+  }
+};
+
+
 
 
 

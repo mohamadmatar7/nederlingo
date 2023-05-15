@@ -36,10 +36,8 @@ export default new EntitySchema({
         subjects: {
             target: "Subject",
             type: "one-to-many",
-            joinColumn: {
-                name: "subject_id",
-            },
-            onDelete: "CASCADE",
+            inverseSide: "class",
+            cascade: true,
         },
     },
 });

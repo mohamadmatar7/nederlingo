@@ -17,25 +17,26 @@ export default new EntitySchema({
     },
     relations: {
         /* users can have many subjects */
-        users: {
-            target: "User",
-            type: "many-to-many",
-            inverseSide: "subject",
-            joinTable: {
-                name: "users_subjects",
-                joinColumn: {
-                    name: "subject_id",
-                    referencedColumnName: "id",
-                },
-                inverseJoinColumn: {
-                    name: "user_id",
-                    referencedColumnName: "id",
-                },
-            },
-        },
+        // users: {
+        //     target: "User",
+        //     type: "many-to-many",
+        //     inverseSide: "subject",
+        //     joinTable: {
+        //         name: "users_subjects",
+        //         joinColumn: {
+        //             name: "subject_id",
+        //             referencedColumnName: "id",
+        //         },
+        //         inverseJoinColumn: {
+        //             name: "user_id",
+        //             referencedColumnName: "id",
+        //         },
+        //     },
+        // },
         class: {
             target: "Class",
             type: "many-to-one",
+            inverseSide: "subjects",
             joinColumn: {
                 name: "class_id",
                 onDelete: "CASCADE",

@@ -9,7 +9,7 @@ export const getClasses = async (req, res, next) => {
         res.status(200).json(
         await classRepository.find({
             where: { id: null },
-            relations: ["users"],
+            relations: ["users", "users.meta"],
         })
         );
     } catch (e) {

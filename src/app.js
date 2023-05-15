@@ -17,7 +17,8 @@ import { home } from "./controllers/home.js";
 import { getUsers,
          getUser,
          deleteUser,
-         updateUser
+         updateUser,
+        getUserByFirstName
  } from "./controllers/api/user.js";
 import {
   login,
@@ -84,11 +85,11 @@ app.post("/logout", logout);
  * API Routing
  */
 //Users routes
-
 app.get("/api/users", getUsers);
 app.get("/api/users/:id", getUser);
 app.delete("/api/users/:id", deleteUser);
 app.put("/api/users/:id", updateUser);
+app.get("/api/users/firstname/:firstname", getUserByFirstName);
 
 //Classes routes
 app.get("/api/classes", getClasses);
