@@ -136,7 +136,8 @@ nav ul li+li {
   box-sizing: border-box;
   width: 400px;
   padding: 30px;
-  border: 1px solid black;
+  box-shadow: 5px 5px 5px 5px rgb(181, 181, 181);
+  border-radius: 24px;
 }
 
 .auth-container h4 {
@@ -162,6 +163,8 @@ nav ul li+li {
 
 .auth-container form .input-container input {
   box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #d7d7d7;
   display: block;
   width: 100%;
   padding: 7px;
@@ -186,6 +189,11 @@ ul.form-errors {
   list-style-position: inside;
 }
 
+
+.auth-container form .input-container input:focus {
+  outline: none;
+  border-bottom: 1px solid #000000;
+}
 
 
 // test
@@ -311,4 +319,76 @@ ul.form-errors {
 .search button {
   width: 100%;
   padding: 7px;
+}
+
+
+
+
+
+
+
+/* CSS */
+.button-base{
+  background-color: #FFC800;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-base:not(:disabled):hover,
+.button-base:not(:disabled):focus {
+  outline: 0;
+  background: #f7d558;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+}
+
+.button-base:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+
+
+.button-secondary {
+  background-color: #d7d7d7;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+.button-secondary:not(:disabled):hover,
+.button-secondary:not(:disabled):focus {
+  outline: 0;
+  background: #dbdcdc;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+}
+
+.button-secondary:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
 }
