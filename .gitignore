@@ -9,7 +9,7 @@ package-lock.json
 node_modules
 
 # Comment this out to exclude .env
-# .env
+.env
 
 # Database
 # nederlingo.sqlite3
