@@ -1,18 +1,17 @@
-<h1>Welkom, {{ user.email }}</h1>
+<h1>Welkom, {{user.email}}</h1>
 
+U bent
+{{#ifEquals user.role.label "Leerling"}}
+  een Leerling.
+{{/ifEquals}}
+{{#ifEquals user.role.label "Lesgever"}}
+  een Lesgever.
+{{/ifEquals}}
+{{#ifEquals user.role.label "Begeleider"}}
+  een Begeleider.
+{{/ifEquals}}
+{{#ifEquals user.role.label "Directie"}}
+  een Directie.
+{{/ifEquals}}
 
-U bent 
-{{#ifEquals user.role.label "Leerling" }}
-een Leerling.
-{{/ifEquals}}
-{{#ifEquals user.role.label "Lesgever" }}
-een Lesgever.
-{{/ifEquals}}
-{{#ifEquals user.role.label "Begeleider" }}
-een Begeleider.
-{{/ifEquals}}
-{{#ifEquals user.role.label "Directie" }}
-een Directie.
-{{/ifEquals}}
-
-
+Dahboard
