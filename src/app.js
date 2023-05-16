@@ -43,6 +43,7 @@ import {
 
 import { getSubjects, getSubject, deleteSubject, postSubject } from "./controllers/api/subject.js";
 
+import { getAllFeedback, getFeedback, deleteFeedback, postFeedback, updateFeedback } from "./controllers/api/feedback.js";
 
 const app = express();
 app.use(express.static("public"));
@@ -76,8 +77,8 @@ app.set("views", VIEWS_PATH);
 
 app.get("/", jwtAuth, home);
 app.get("/login", login);
-app.get("/register", register);
-app.post("/register", registerAuthentication, postRegister, register);
+// app.get("/register", register);
+// app.post("/register", registerAuthentication, postRegister, register);
 app.post("/login", loginAuthentication, postLogin, login);
 app.post("/logout", logout);
 
@@ -103,6 +104,13 @@ app.get("/api/subjects", getSubjects);
 app.get("/api/subjects/:id", getSubject);
 app.delete("/api/subjects/:id", deleteSubject);
 app.post("/api/subjects", postSubject);
+
+//Feedbacks routes
+app.get("/api/feedback", getAllFeedback);
+app.get("/api/feedback/:id", getFeedback);
+app.delete("/api/feedback/:id", deleteFeedback);
+app.post("/api/feedback", postFeedback);
+app.put("/api/feedback/:id", updateFeedback);
 
 // start the server
 DataSource.initialize()

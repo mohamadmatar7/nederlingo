@@ -48,6 +48,24 @@ export default new EntitySchema({
         },
       },
     },
+    feedback: {
+      target: "Feedback",
+      type: "many-to-many",
+      cascade: true,
+      inverseSide: "users",
+      joinTable: {
+        name: "users_feedbacks",
+        joinColumn: {
+          name: "user_id",
+          referencedColumnName: "id",
+        },
+        inverseJoinColumn: {
+          name: "feedback_id",
+          referencedColumnName: "id",
+        },
+      },
+    },
+    
     // subjects: {
     //   target: "Subject",
     //   type: "many-to-many",
