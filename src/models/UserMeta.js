@@ -25,6 +25,18 @@ export default new EntitySchema({
       type: "varchar",
       default: "/images/default.jpg",
     },
+    birthday: {
+      type: "date",
+    },
+    phone: {
+      type: "varchar",
+    },
+    address: {
+      type: "varchar",
+    },
+    nationality: {
+      type: "varchar",
+    },
   },
   relations: {
     user: {

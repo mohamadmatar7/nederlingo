@@ -7,8 +7,8 @@ class RoleFactory extends Factory {
         super();
         this.roles = [
             "Leerling",
-            "Leerkracht",
-            "Begeleirder",
+            "Lesgever",
+            "Begeleider",
             "Directeur",
         ];
     }

@@ -14,14 +14,23 @@ export const home = async (req, res) => {
       "role",
       "class",
       "class.users",
-      "subjects",
     ],
   });
+  const classes = await DataSource.getRepository("Class").find({
+    relations: [
+      "users",
+      "users.meta",
+      "subjects",
+      "users.role"
+    ],
+  });
+
   const Class = await DataSource.getRepository("Class").findOne({
     where: { id: user.class.id },
     relations: [
       "users",
       "users.meta",
+      "subjects",
     ],
   });
   const userRole = req.user.role.label;
@@ -30,13 +39,34 @@ export const home = async (req, res) => {
       // user: req.user,
       user: user,
       Class: Class,
+      classes: classes,
       
     });
-    console.log(user);
-    console.log(Class);
+    // console.log(user);
+    // console.log(Class);
+    console.log(classes);
     return;
+  };
 
-  }
+
+  if(userRole==="Lesgever"){
+    res.render("lesgever", {
+      user: user,
+      Class: Class,
+      classes: classes,
+    });
+    return;
+  };
+
+  if(userRole==="Begeleider"){
+    res.render("begeleider", {
+      user: user,
+      Class: Class,
+      classes: classes,
+    });
+    return;
+  };
+
   // render the home page
   res.render("home", {
     user: req.user,

@@ -9,6 +9,6 @@ const dbSeeder = new DatabaseSeeder(
     entities
 );
 
-dbSeeder.run(UserFactory, 50).then((record) => {
+dbSeeder.run(UserFactory, 10).then((record) => {
     console.log("inserted", record);
 })

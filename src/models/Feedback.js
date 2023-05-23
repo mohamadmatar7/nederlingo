@@ -3,28 +3,28 @@ import typeorm from "typeorm";
 const { EntitySchema } = typeorm;
 
 export default new EntitySchema({
-    name: "Class",
-    tableName: "classes",
+    name: "Feedback",
+    tableName: "feedbacks",
     columns: {
         id: {
             primary: true,
             type: "int",
             generated: true,
         },
-        label: {
+        content: {
             type: "varchar",
-        }
+            nullable: true,
+        },
     },
-    relations: {
-        /** users can have many classes */
-        users: {
+        relations: {
+            users: {
             target: "User",
             type: "many-to-many",
-            inverseSide: "class",
+            inverseSide: "feedback",
             joinTable: {
-                name: "users_classes",
+                name: "users_feedbacks",
                 joinColumn: {
-                    name: "class_id",
+                    name: "feedback_id",
                     referencedColumnName: "id",
                 },
                 inverseJoinColumn: {
@@ -33,11 +33,7 @@ export default new EntitySchema({
                 },
             },
         },
-        subjects: {
-            target: "Subject",
-            type: "one-to-many",
-            inverseSide: "class",
-            cascade: true,
-        },
     },
 });
+
+

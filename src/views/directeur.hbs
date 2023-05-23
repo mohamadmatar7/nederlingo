@@ -1,23 +1,90 @@
-<h1>Welkom, Meneer {{ user.meta.firstname }}</h1>
-<p>U bent een {{ user.role.label }}.</p>
+<h1>Welkom, Meneer {{user.meta.firstname}}</h1>
+<p>U bent een {{user.role.label}}.</p>
+
+{{! test }}
+
+<h2>De klassen</h2>
+<ul class="test">
+  {{#each classes}}
+    <li class="class">
+      <h3>Class: {{this.label}}</h3>
+      {{!-- <ul class="subjects">
+        <h4>subjects</h4>
+        {{#each this.subjects}}
+          <li class="subject">
+            <strong>{{this.name}}</strong>
+          </li>
+        {{/each}}
+      </ul>
+      <ul class="users">
+        <h4>Users</h4>
+        {{#each this.users}}
+          <li class="user">
+            <img src="{{this.meta.avatar}}" alt="" />
+            <h5>{{this.meta.firstname}} {{this.meta.lastname}}</h5>
+            <h6>{{this.role.label}}</h6>
+          </li>
+        {{/each}}
+      </ul> --}}
+    </li>
+
+  {{/each}}
+</ul>
 
 
-{{!-- test --}}
+<div class="search">
+<h2>De gebruikers</h2>
+<form action="#" method="post" id="formSearch">
+  <label for="searchUser"></label>
+  <input id="searchUser" name="searchUser" type="text" placeholder="Search">
+  <button type="submit">Search</button>
+</form>
 
-<h4>De klassen</h4>
-{{#each user.class}}
-<li> {{ this.label }}</li>
-{{/each}}
+<ul id="result" class="search__result"></ul>
+</div>
 
-{{!-- test --}}
-<h4>Class {{ Class.label }}</h4>
-{{#each Class.users }}
-<li> {{ this.meta.firstname }}</li>
-{{/each}}
+<script>
+document.getElementById('formSearch').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting normally
+
+  var searchValue = document.getElementById('searchUser').value; // Get the search query from the input field
+
+  fetch('http://localhost:5000/api/users/firstname/' + (searchValue))
+    .then(function(response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error: ' + response.status);
+      }
+    })
+    .then(function(data) {
+
+      console.log(data); 
+      renderUsers(data); 
+    })
+    .catch(function(error) {
+      console.log(error); // Handle any errors
+    });
+});
+
+async function renderUsers(users) {
+  const $result = document.getElementById("result");
+  $result.innerHTML = users
+    .map((user) => {
+      return `
+      <li class="card" data-username="${user.id}">
+        <img src="${user.meta.avatar}" alt="">
+        <h4>${user.meta.firstname} ${user.meta.lastname}</h4>
+        <h5>${user.role.label}</h5>
+        <h6>${user.class.map(
+          (clas) => {
+            return `${clas.label}`;
+          }
+        ).join("")}</h6></li>
+      `;
+    })
+    .join("");
+}
 
 
-{{!-- test --}}
-<div class="logo"><img src="{{ user.meta.avatar }}" alt=""></div>
-{{!-- test --}}
-
-
+</script>

@@ -8,7 +8,11 @@ class UserMetaFactory extends Factory {
             firstname: faker.name.firstName(),
             lastname: faker.name.lastName(),
             username: faker.internet.userName(),
-            avatar: faker.image.avatar()
+            avatar: faker.image.avatar(),
+            birthday: faker.date.past(),
+            phone: faker.phone.number(),
+            address: faker.address.streetAddress(),
+            nationality: faker.address.country(),
         };
         const record = await this.insert(userMeta);
         this.inserted.push(record);
