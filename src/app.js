@@ -14,12 +14,14 @@ import DataSource from "./lib/DataSource.js";
 
 // import actions from controllers
 import { home } from "./controllers/home.js";
-import { getUsers,
-         getUser,
-         deleteUser,
-         updateUser,
-        getUserByFirstName
- } from "./controllers/api/user.js";
+import { courses } from "./controllers/courses.js";
+import {
+  getUsers,
+  getUser,
+  deleteUser,
+  updateUser,
+  getUserByFirstName,
+} from "./controllers/api/user.js";
 import {
   login,
   register,
@@ -34,16 +36,27 @@ import loginAuthentication from "./middleware/validation/loginAuthentication.js"
 import { jwtAuth } from "./middleware/jwtAuth.js";
 
 import {
-        getClasses,
-        getClass,
-        deleteClass,
-        postClass,
-        updateClass
-      } from "./controllers/api/class.js";
+  getClasses,
+  getClass,
+  deleteClass,
+  postClass,
+  updateClass,
+} from "./controllers/api/class.js";
 
-import { getSubjects, getSubject, deleteSubject, postSubject } from "./controllers/api/subject.js";
+import {
+  getSubjects,
+  getSubject,
+  deleteSubject,
+  postSubject,
+} from "./controllers/api/subject.js";
 
-import { getAllFeedback, getFeedback, deleteFeedback, postFeedback, updateFeedback } from "./controllers/api/feedback.js";
+import {
+  getAllFeedback,
+  getFeedback,
+  deleteFeedback,
+  postFeedback,
+  updateFeedback,
+} from "./controllers/api/feedback.js";
 
 const app = express();
 app.use(express.static("public"));
@@ -77,6 +90,7 @@ app.set("views", VIEWS_PATH);
 
 app.get("/", jwtAuth, home);
 app.get("/login", login);
+app.get("/vakken", jwtAuth, getSubjects, courses);
 // app.get("/register", register);
 // app.post("/register", registerAuthentication, postRegister, register);
 app.post("/login", loginAuthentication, postLogin, login);
