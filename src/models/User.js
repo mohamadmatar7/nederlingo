@@ -31,8 +31,8 @@ export default new EntitySchema({
       joinColumn: true,
       inverseSide: "users",
     },
-    class: {
-      target: "Class",
+    classrooms: {
+      target: "Classroom",
       type: "many-to-many",
       cascade: true,
       inverseSide: "users",
@@ -65,7 +65,7 @@ export default new EntitySchema({
         },
       },
     },
-    
+
     // subjects: {
     //   target: "Subject",
     //   type: "many-to-many",
