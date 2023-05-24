@@ -2,6 +2,7 @@
 
 <div class="container">
 
+
    {{>sidebar_leerling}}
 
 <div class="main-container">
@@ -12,6 +13,11 @@
     </div>
 
   <div class="card-container">
+
+    
+  {{#each courses}}
+    {{ name }}
+  {{/each}}
 
     <div class="icon-card">
       <div class="icon-card--label">

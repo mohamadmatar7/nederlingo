@@ -24,7 +24,7 @@ class FeebackFactory extends Factory {
     }
 
     async insert(content) {
-        console.log("This record will be inserted", content);
+        // console.log("This record will be inserted", content);
 
         const FeedRepo = DataSource.getRepository("Feedback");
 

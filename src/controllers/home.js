@@ -30,9 +30,9 @@ export const home = async (req, res) => {
       Class: Class,
       classes: classes,
     });
-    // console.log(user);
-    // console.log(Class);
-    console.log(classes);
+    // // console.log(user);
+    // // console.log(Class);
+    // console.log(classes);
     return;
   }
 

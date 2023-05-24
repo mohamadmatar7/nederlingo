@@ -136,5 +136,5 @@ DataSource.initialize()
     });
   })
   .catch(function (error) {
-    console.log("Error: ", error);
+    // console.log("Error: ", error);
   });

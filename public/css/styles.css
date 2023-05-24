@@ -60,14 +60,6 @@
    font-size: 1.1rem;
  }
  
- #content {
-   padding: 30px;
- }
- 
- /**
-  * Links
-  */
- 
  a {
    text-decoration: none;
    color: black;
