@@ -21,11 +21,10 @@ export const getSubjects = async (req, res, next) => {
       relations: ["subjects"],
     });
 
-    console.log(classroom.subjects);
-
     // get the repository
     const subjectRepository = DataSource.getRepository("Subject");
-    next(classroom.subjects);
+    req.classrooms = classroom.subjects;
+    next();
   } catch (e) {
     next(e.message);
   }
