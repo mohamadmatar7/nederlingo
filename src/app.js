@@ -14,7 +14,9 @@ import DataSource from "./lib/DataSource.js";
 
 // import actions from controllers
 import { home } from "./controllers/home.js";
+import { file } from "./controllers/file.js";
 import { courses } from "./controllers/courses.js";
+import { dashboard } from "./controllers/overzicht.js";
 import {
   getUsers,
   getUser,
@@ -91,6 +93,8 @@ app.set("views", VIEWS_PATH);
 app.get("/", jwtAuth, home);
 app.get("/login", login);
 app.get("/vakken", jwtAuth, getSubjects, courses);
+app.get("/dossier", jwtAuth, file);
+app.get("/overzicht", jwtAuth, dashboard);
 // app.get("/register", register);
 // app.post("/register", registerAuthentication, postRegister, register);
 app.post("/login", loginAuthentication, postLogin, login);
@@ -125,6 +129,8 @@ app.get("/api/feedback/:id", getFeedback);
 app.delete("/api/feedback/:id", deleteFeedback);
 app.post("/api/feedback", postFeedback);
 app.put("/api/feedback/:id", updateFeedback);
+
+// Oefeningen
 
 // start the server
 DataSource.initialize()

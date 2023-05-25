@@ -5,8 +5,9 @@ export const courses = async (req, res) => {
   const meta = await metaRepo.findOne({
     where: { id: req.user.id },
   });
-  console.log(req?.classrooms);
+
   res.render("vakkenleerling", {
+    actSidebar: "vakken",
     user: req.user,
     meta: meta,
     courses: req?.classrooms,
