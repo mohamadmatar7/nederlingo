@@ -23,24 +23,13 @@ export const home = async (req, res) => {
     relations: ["users", "users.meta", "subjects"],
   });
   const userRole = req.user.role.label;
-  if (userRole === "Directeur") {
-    res.render("directeur", {
-      // user: req.user,
-      user: user,
-      Class: Class,
-      classes: classes,
-    });
-    // // console.log(user);
-    // // console.log(Class);
-    // console.log(classes);
-    return;
-  }
 
   if (userRole === "Lesgever") {
     res.render("lesgever", {
       user: user,
       Class: Class,
       classes: classes,
+      meta: meta,
     });
     return;
   }
@@ -50,6 +39,16 @@ export const home = async (req, res) => {
       user: user,
       Class: Class,
       classes: classes,
+      meta: meta,
+    });
+    return;
+  }
+
+  if (userRole === "Directeur") {
+    res.render("directeur", {
+      user: user,
+      classes: classes,
+      meta: meta,
     });
     return;
   }

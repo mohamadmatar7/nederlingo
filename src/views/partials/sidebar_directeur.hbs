@@ -1,0 +1,78 @@
+
+<sidebar>
+  <a href="/overzicht">
+  <ul class="sidebar">
+    <li class="sidebar__item">
+      <img src="/images/icons/user.png" alt="" />
+      <div class="sidebar_personalia">
+        <strong>Mila Duterloo</strong>
+        <strong>Klas: 1a</strong>
+      </div>
+      </a>
+    </li>
+
+    <li class="sidebar__item">
+         <li
+    {{#ifEquals 'overzicht' actSidebar }}
+      class="sidebar__item active"
+      {{ else }}
+      class="sidebar__item"
+    {{/ifEquals}}
+    >
+      <a href="/overzicht">
+        <img src="/images/icons/dashboard.png" alt="overzicht" />
+        <strong>Overzicht</strong>
+      </a>
+    </li>
+    <li
+    {{#ifEquals 'vakken' actSidebar }}
+      class="sidebar__item active"
+      {{ else }}
+      class="sidebar__item"
+    {{/ifEquals}}
+    >
+      <a href="/allevakken">
+        <img src="/images/icons/book.png" alt="vakken" />
+        <strong>Vakken</strong>
+      </a>
+    </li>
+    <li
+    {{#ifEquals 'dossier' actSidebar }}
+      class="sidebar__item active"
+      {{ else }}
+      class="sidebar__item"
+    {{/ifEquals}}
+    >
+      
+    <a href="/alleklassen">
+        <img src="/images/icons/to-do-list.png" alt="dossier" />
+        <strong>Klassen</strong>
+
+
+      </a>
+    </li>
+      
+      
+    </li>
+    <li class="sidebar__item">
+      <a href="/feedback">
+        <img src="/images/icons/thumbs-up.png" alt="feedback" />
+        <strong>Feedback</strong>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/afwezigheden">
+        <img src="/images/icons/calendar.png" alt="afwezigheden" />
+        <strong>Afwezigheden</strong>
+      </a>
+    </li>
+    <li class="sidebar__logout">
+      <form action="/logout" method="post">
+        <button type="submit" class="btn btn-primary button-base">
+          <img src="/images/icons/logout.png" alt="Logout" />
+          <strong>Logout</strong>
+        </button>
+      </form>
+    </li>
+  </ul>
+</sidebar>

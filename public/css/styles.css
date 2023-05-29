@@ -438,6 +438,7 @@ ul.form-errors {
   flex-wrap: wrap;
   width: 35rem;
   gap: 1rem;
+  list-style: none;
 }
 
 .container-photos img {

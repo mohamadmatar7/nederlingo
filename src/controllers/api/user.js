@@ -114,7 +114,7 @@ export const getUserByFirstName = async (req, res, next) => {
         .leftJoinAndSelect("user.meta", "meta")
         .where("UPPER(meta.firstname) LIKE :firstName", { firstName: `%${firstName}%` })
         .leftJoinAndSelect("user.role", "role")
-        .leftJoinAndSelect("user.class", "class")
+        .leftJoinAndSelect("user.classrooms", "classrooms")
         .getMany()
     );
   } catch (e) {

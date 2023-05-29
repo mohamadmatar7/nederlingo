@@ -3,24 +3,26 @@ import DataSource from "../../lib/DataSource.js";
 
 export const getClasses = async (req, res, next) => {
     try {
-        // get the repository
-        const classRepository = DataSource.getRepository("Class");
-    
-        res.status(200).json(
-        await classRepository.find({
-            where: { id: null },
-            relations: ["users", "users.meta"],
-        })
-        );
+      // get the repository
+      const classRepository = DataSource.getRepository("Classroom");
+  
+      const classes = await classRepository.find({
+        relations: ["users", "users.meta"],
+      });
+  
+      req.classes = classes; // Store the classes in the request object
+      next(); // Call the next middleware
     } catch (e) {
-        next(e.message);
+      next(e.message);
     }
-    };
+  };
+  
+  
 
 export const getClass = async (req, res, next) => {
     try {
         // get the repository
-        const classRepository = DataSource.getRepository("Class");
+        const classRepository = DataSource.getRepository("Classroom");
     
         res.status(200).json(
         await classRepository.findOne({
@@ -35,7 +37,7 @@ export const getClass = async (req, res, next) => {
 
 export const deleteClass = async (req, res, next) => {
     try {
-        const classRepository = DataSource.getRepository("Class");
+        const classRepository = DataSource.getRepository("Classroom");
         // get the user by id
         const { id } = req.params;
         const Class = await classRepository.findOneBy({ id: id });
@@ -48,7 +50,7 @@ export const deleteClass = async (req, res, next) => {
 
 export const postClass = async (req, res, next) => {
     try {
-        const classRepository = DataSource.getRepository("Class");
+        const classRepository = DataSource.getRepository("Classroom");
         const classObj = req.body;
         const newClass = await classRepository.save(classObj);
         res.status(200).json(newClass);
@@ -59,7 +61,7 @@ export const postClass = async (req, res, next) => {
 
 export const updateClass = async (req, res, next) => {
     try {
-        const classRepository = DataSource.getRepository("Class");
+        const classRepository = DataSource.getRepository("Classroom");
         const Class = await classRepository.findOneBy({ id: req.params.id });
 
     if (!Class) {

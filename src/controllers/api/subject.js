@@ -30,6 +30,20 @@ export const getSubjects = async (req, res, next) => {
   }
 };
 
+export const getSubjectsP = async (req, res, next) => {
+  try {
+    // get the repository
+    const subjectRepository = DataSource.getRepository("Subject");
+
+    req.classrooms = await subjectRepository.find();
+
+    next();
+  } catch (e) {
+    next(e.message);
+  }
+};
+
+
 export const getSubject = async (req, res, next) => {
   try {
     // get the repository
