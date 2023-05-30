@@ -107,7 +107,7 @@ app.get("/alleklassen/:id", jwtAuth, getClass, classP);
 app.get("/dossier", jwtAuth, file);
 app.get("/overzicht", jwtAuth, dashboard);
 app.get("/register", register);
-app.post("/register", registerAuthentication, postRegister, register);
+app.post("/register", registerAuthentication, postRegister, register, AddUserToClass);
 app.post("/login", loginAuthentication, postLogin, login);
 app.post("/logout", logout);
 

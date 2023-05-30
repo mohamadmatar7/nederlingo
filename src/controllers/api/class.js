@@ -11,6 +11,7 @@ export const getClasses = async (req, res, next) => {
       });
   
       req.classes = classes;
+      next();
     } catch (e) {
       next(e.message);
     }
