@@ -1,0 +1,14 @@
+<div class="container">
+
+
+   {{>sidebar_directeur}}
+   <div class="container-students">
+    <h1>Studenten</h1>
+<ul class="students-list">
+  {{#each classroom.users}}
+    <li> <a class="link-student" href=""><img src="{{this.meta.avatar}}" alt=""> {{this.meta.firstname}} {{this.meta.lastname}}</a></li>
+  {{/each}}
+</ul>
+</div>
+
+</div>

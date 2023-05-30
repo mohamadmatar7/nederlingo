@@ -1,35 +1,26 @@
-<h1>Welkom, Meneer {{user.meta.firstname}}</h1>
-<p>U bent een {{user.role.label}}.</p>
+<div class="container">
 
-{{! test }}
 
-<h2>De klassen</h2>
-<ul class="test">
-  {{#each classes}}
-    <li class="class">
-      <h3>Class: {{this.label}}</h3>
-      {{!-- <ul class="subjects">
-        <h4>subjects</h4>
-        {{#each this.subjects}}
-          <li class="subject">
-            <strong>{{this.name}}</strong>
-          </li>
-        {{/each}}
-      </ul>
-      <ul class="users">
-        <h4>Users</h4>
-        {{#each this.users}}
-          <li class="user">
-            <img src="{{this.meta.avatar}}" alt="" />
-            <h5>{{this.meta.firstname}} {{this.meta.lastname}}</h5>
-            <h6>{{this.role.label}}</h6>
-          </li>
-        {{/each}}
-      </ul> --}}
-    </li>
-
-  {{/each}}
-</ul>
+   {{>sidebar_directeur}}
+   <div class="main-container">
+  <h1>👋🏼 Hey {{ meta.firstname }}, Welkom Terug!</h1>
+{{!-- <p>U bent een {{user.role.label}}.</p> --}}
+        <div class="icon-card" >
+      <div class="icon-card--label">
+         <a href="/allevakken"><h3>Vakken</h3></a>
+      </div>
+      <div class="icon-card--img">
+        <img src="/images/icons/vakken.png" alt="vakken"  />
+      </div>
+    </div>
+        <div class="icon-card" >
+      <div class="icon-card--label">
+         <a href="/alleklassen"><h3>Klassen</h3></a>
+      </div>
+      <div class="icon-card--img">
+        <img src="/images/icons/vakken.png" alt="vakken"  />
+      </div>
+    </div>
 
 
 <div class="search">
@@ -41,6 +32,9 @@
 </form>
 
 <ul id="result" class="search__result"></ul>
+</div>
+
+</div>
 </div>
 
 <script>
@@ -76,7 +70,7 @@ async function renderUsers(users) {
         <img src="${user.meta.avatar}" alt="">
         <h4>${user.meta.firstname} ${user.meta.lastname}</h4>
         <h5>${user.role.label}</h5>
-        <h6>${user.class.map(
+        <h6>${user.classrooms.map(
           (clas) => {
             return `${clas.label}`;
           }

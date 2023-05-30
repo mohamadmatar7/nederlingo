@@ -30,12 +30,14 @@ class UserFactory extends Factory {
             password: faker.internet.password(),
             role: randomRole,
             meta: userMeta,
-            class: randomClass,
+            classrooms: randomClass,
             subjects: [subjects],
             feedback: feedback
         };
+        // console.log(user)
     
         const record = await this.insert(user, randomRole, randomClass, [subjects], feedback);
+        console.log(record)
         this.inserted.push(record);
         return record;
     }      
@@ -60,7 +62,7 @@ class UserFactory extends Factory {
             ...user,
             role: roleRecord,
             meta: user.meta,
-            class: classRecord,
+            classrooms: classRecord,
             subjects: subjectRecord,
             feedback: feedbackRecord
         });
