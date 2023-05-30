@@ -100,7 +100,7 @@ export const postAvatar = async (req, res, next) => {
     }
     // Update the user's meta properties based on request body
     if (req.file) {
-      user.meta.avatar = "/images/" + req.file.originalname;
+      user.meta.avatar = "/images/avatars/" + req.file.originalname;
     }
     console.log(req.file.originalname);
 

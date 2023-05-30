@@ -23,7 +23,7 @@ export default new EntitySchema({
     },
     avatar: {
       type: "varchar",
-      default: "/images/default.jpg",
+      default: "/images/avatars/default.jpg",
     },
     birthday: {
       type: "date",
