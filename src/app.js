@@ -26,6 +26,8 @@ import {
   deleteUser,
   updateUser,
   getUserByFirstName,
+  AddUserToClass,
+  postAvatar,
 } from "./controllers/api/user.js";
 import {
   login,
@@ -63,6 +65,8 @@ import {
   postFeedback,
   updateFeedback,
 } from "./controllers/api/feedback.js";
+import multer from "multer";
+import { saveAvatar } from "./middleware/avatar.js";
 
 const app = express();
 app.use(express.static("public"));
@@ -114,8 +118,10 @@ app.post("/logout", logout);
 app.get("/api/users", getUsers);
 app.get("/api/users/:id", getUser);
 app.delete("/api/users/:id", deleteUser);
+app.post("/api/users/:id",multer().single("avatar"), saveAvatar,postAvatar);
 app.put("/api/users/:id", updateUser);
 app.get("/api/users/firstname/:firstname", getUserByFirstName);
+app.post("/api/users/addtoclass", AddUserToClass);
 
 //Classes routes
 app.get("/api/classes", getClasses);
