@@ -100,8 +100,8 @@ app.get("/allevakken", jwtAuth, getSubjectsP, coursesP);
 app.get("/alleklassen", jwtAuth, getClasses, classesP);
 app.get("/dossier", jwtAuth, file);
 app.get("/overzicht", jwtAuth, dashboard);
-// app.get("/register", register);
-// app.post("/register", registerAuthentication, postRegister, register);
+app.get("/register", register);
+app.post("/register", registerAuthentication, postRegister, register);
 app.post("/login", loginAuthentication, postLogin, login);
 app.post("/logout", logout);
 
