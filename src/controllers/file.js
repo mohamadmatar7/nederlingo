@@ -5,11 +5,15 @@ export const file = async (req, res) => {
   const user = await userRepo.findOne({
     where: { id: req.user.id },
   });
+  const metaRepo = DataSource.getRepository("UserMeta");
+  const meta = await metaRepo.findOne({
+    where: { id: req.user.id },
+  });
 
   res.render("dossier-leerling", {
     actSidebar: "dossier",
     user: req.user,
-    meta: user,
+    meta: meta,
     courses: req?.classrooms,
   });
 };
