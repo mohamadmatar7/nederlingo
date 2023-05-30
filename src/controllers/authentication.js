@@ -252,7 +252,7 @@ export const postRegister = async (req, res, next) => {
       await userRepository.save(user);
       // window.location.reload();
 
-      res.redirect("/login");
+      res.redirect("/")
     }
   } catch (e) {
     next(e.message);
