@@ -10,5 +10,5 @@ const dbSeeder = new DatabaseSeeder(
 );
 
 dbSeeder.run(UserFactory, 10).then((record) => {
-    // console.log("inserted", record);
+    console.log("inserted", record);
 })

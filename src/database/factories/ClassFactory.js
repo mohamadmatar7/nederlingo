@@ -24,9 +24,7 @@ class ClassFactory extends Factory {
     }
 
     async insert(label) {
-        // console.log("This record will be inserted", label);
-
-        const ClassRepo = DataSource.getRepository("Class");
+        const ClassRepo = DataSource.getRepository("Classroom");
 
         let record = await ClassRepo.findOne({where: { label }});
         if (record) return record;

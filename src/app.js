@@ -16,6 +16,9 @@ import DataSource from "./lib/DataSource.js";
 import { home } from "./controllers/home.js";
 import { file } from "./controllers/file.js";
 import { courses } from "./controllers/courses.js";
+import { coursesP } from "./controllers/coursesprincipal.js";
+import { classesP } from "./controllers/classesprincipal.js";
+import { classP } from "./controllers/classprincipal.js";
 import { dashboard } from "./controllers/overzicht.js";
 import {
   getUsers,
@@ -47,6 +50,7 @@ import {
 
 import {
   getSubjects,
+  getSubjectsP,
   getSubject,
   deleteSubject,
   postSubject,
@@ -93,10 +97,13 @@ app.set("views", VIEWS_PATH);
 app.get("/", jwtAuth, home);
 app.get("/login", login);
 app.get("/vakken", jwtAuth, getSubjects, courses);
+app.get("/allevakken", jwtAuth, getSubjectsP, coursesP);
+app.get("/alleklassen", jwtAuth, getClasses, classesP);
+app.get("/alleklassen/:id", jwtAuth, getClass, classP);
 app.get("/dossier", jwtAuth, file);
 app.get("/overzicht", jwtAuth, dashboard);
-// app.get("/register", register);
-// app.post("/register", registerAuthentication, postRegister, register);
+app.get("/register", register);
+app.post("/register", registerAuthentication, postRegister, register);
 app.post("/login", loginAuthentication, postLogin, login);
 app.post("/logout", logout);
 
@@ -119,6 +126,7 @@ app.put("/api/classes/:id", updateClass);
 
 //Subjects routes
 app.get("/api/subjects", getSubjects);
+app.get("/api/allsubjects", getSubjectsP);
 app.get("/api/subjects/:id", getSubject);
 app.delete("/api/subjects/:id", deleteSubject);
 app.post("/api/subjects", postSubject);

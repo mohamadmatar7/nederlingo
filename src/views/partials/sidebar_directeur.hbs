@@ -3,12 +3,12 @@
   <a href="/overzicht">
   <ul class="sidebar">
     <li class="sidebar__item">
-      <img src="/images/icons/user.png" alt="" />
+      <img src="{{user.meta.avatar}}" alt="" />
       <div class="sidebar_personalia">
-        <strong>{{ user.meta.firstname }}</strong>
-        <strong>Klas:{{#each user.classrooms}}
-          {{this.label}}
-          {{/each}}</strong>
+        <strong>{{ user.meta.firstname }} {{user.meta.lastname}}</strong>
+        <strong>
+{{user.role.label}}
+          </strong>
       </div>
       </a>
     </li>
@@ -33,7 +33,7 @@
       class="sidebar__item"
     {{/ifEquals}}
     >
-      <a href="/vakken">
+      <a href="/allevakken">
         <img src="/images/icons/book.png" alt="vakken" />
         <strong>Vakken</strong>
       </a>
@@ -46,9 +46,9 @@
     {{/ifEquals}}
     >
       
-    <a href="/dossier">
+    <a href="/alleklassen">
         <img src="/images/icons/to-do-list.png" alt="dossier" />
-        <strong>Dossier</strong>
+        <strong>Klassen</strong>
 
 
       </a>
@@ -66,6 +66,12 @@
       <a href="/afwezigheden">
         <img src="/images/icons/calendar.png" alt="afwezigheden" />
         <strong>Afwezigheden</strong>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/register">
+        <img src="/images/icons/to-do-list.png" alt="leerlingToevogen" />
+        <strong>Gebruiker toev.</strong>
       </a>
     </li>
     <li class="sidebar__logout">
