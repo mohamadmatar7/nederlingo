@@ -26,12 +26,12 @@ export const getUser = async (req, res, next) => {
     // get the repository
     const userRepository = DataSource.getRepository("User");
 
-    res.status(200).json(
-      await userRepository.findOne({
+      const users= await userRepository.findOne({
         where: { id: req.params.id },
-        relations: ["meta", "role", "classrooms", "absence"],
+        relations: ["meta", "role", "classrooms",],
       })
-    );
+      req.users = users;
+      next();
   } catch (e) {
     next(e.message);
   }
