@@ -33,9 +33,9 @@
 }
 
 @font-face {
-  font-family:'Sriracha';
-  src: url('../fonts/Sriracha.woff2') format('woff2'),
-  url('../fonts/Sriracha.woff') format('woff');
+  font-family: "Sriracha";
+  src: url("../fonts/Sriracha.woff2") format("woff2"),
+    url("../fonts/Sriracha.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
@@ -74,7 +74,7 @@ p {
 
 h1,
 h2 {
-  font-family:'Sriracha';
+  font-family: "Sriracha";
   font-weight: 400;
   font-style: normal;
 }
