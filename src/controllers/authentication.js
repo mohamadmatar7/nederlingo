@@ -29,11 +29,106 @@ export const register = async (req, res) => {
         ? req.formErrorFields.password
         : null,
     },
+    {
+      name: "firstname",
+      label: "Voornaam ",
+      type: "text",
+      value: req.body?.firstname ? req.body.firstname : "",
+      error: req.formErrorFields?.firstname ? req.formErrorFields.firstname : null,
+    },
+    {
+      name: "lastname",
+      label: "Achternaam",
+      type: "text",
+      value: req.body?.lastname ? req.body.lastname : "",
+      error: req.formErrorFields?.lastname ? req.formErrorFields.lastname : null,
+    },
+    {
+      name: "birthday",
+      label: "Geboortedatum",
+      type: "date",
+      value: req.body?.birthday ? req.body.birthday : "",
+      error: req.formErrorFields?.birthday ? req.formErrorFields.birthday : null,
+    },
+    {
+      name: "birthplace",
+      label: "Geboorteplaats",
+      type: "text",
+      value: req.body?.birthplace ? req.body.birthplace : "",
+      error: req.formErrorFields?.birthplace ? req.formErrorFields.birthplace : null,
+    },
+    {
+      name: "phone",
+      label: "Telefoonnummer",
+      type: "text",
+      value: req.body?.phone ? req.body.phone : "",
+      error: req.formErrorFields?.phone ? req.formErrorFields.phone : null,
+    },
+    {
+      name: "address",
+      label: "Adres",
+      type: "text",
+      value: req.body?.address ? req.body.address : "",
+      error: req.formErrorFields?.address ? req.formErrorFields.address : null,
+    },
+    {
+      name: "nationality",
+      label: "Nationaliteit",
+      type: "text",
+      value: req.body?.nationality ? req.body.nationality : "",
+      error: req.formErrorFields?.nationality ? req.formErrorFields.nationality : null,
+    },
+    {
+      name: "parent",
+      label: "Ouders/Voogd",
+      type: "text",
+      value: req.body?.parent ? req.body.parent : "",
+      error: req.formErrorFields?.parent ? req.formErrorFields.parent : null,
+    },
+    {
+      name: "family",
+      label: "Gezinssituatie",
+      type: "text",
+      value: req.body?.family ? req.body.family : "",
+      error: req.formErrorFields?.family ? req.formErrorFields.family : null,
+    },
+    {
+      name: "bankpreference",
+      label: "Banksvoorkeur",
+      type: "text",
+      value: req.body?.bankpreference ? req.body.bankpreference : "",
+      error: req.formErrorFields?.bankpreference ? req.formErrorFields.bankpreference : null,
+    },
+    {
+      name: "transport",
+      label: "Vervoer",
+      type: "text",
+      value: req.body?.transport ? req.body.transport : "",
+      error: req.formErrorFields?.transport ? req.formErrorFields.transport : null,
+    },
+    {
+      name: "gender",
+      label: "Geslacht",
+      type: "text",
+      value: req.body?.gender ? req.body.gender : "",
+      error: req.formErrorFields?.gender ? req.formErrorFields.gender : null,
+    },
+    {
+      name: "religion",
+      label: "Geloofsovertuiging",
+      type: "text",
+      value: req.body?.religion ? req.body.religion : "",
+      error: req.formErrorFields?.religion ? req.formErrorFields.religion : null,
+    },
+
+
   ];
 
   // get the roles
   const roleRepository = await DataSource.getRepository("Role");
   const roles = await roleRepository.find();
+  const metaRepository = await DataSource.getRepository("UserMeta");
+  const meta = await metaRepository.find();
 
   // render the register page
   res.render("register", {
@@ -41,6 +136,7 @@ export const register = async (req, res) => {
     inputs,
     formErrors,
     roles,
+    meta,
   });
 };
 
@@ -97,6 +193,8 @@ export const postRegister = async (req, res, next) => {
       // make user repository instance
       const userRepository = await DataSource.getRepository("User");
       const roleRepository = await DataSource.getRepository("Role");
+      const metaRepository = await DataSource.getRepository("UserMeta");
+ 
 
       const userExists = await userRepository.findOne({
         where: {
@@ -115,6 +213,7 @@ export const postRegister = async (req, res, next) => {
         return next();
       }
 
+
       if (userExists) {
         req.formErrors = [{ message: "Gebruiker bestaat al." }];
         return next();
@@ -122,15 +221,36 @@ export const postRegister = async (req, res, next) => {
 
       const hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
+      const meta = await metaRepository.create({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        birthday: req.body.birthday,
+        birthplace: req.body.birthplace,
+        parent: req.body.parent,
+        family: req.body.family,
+        phone: req.body.phone,
+        address: req.body.address,
+        bankpreference: req.body.bankpreference,
+        transport: req.body.transport,
+        gender: req.body.gender,
+        religion: req.body.religion,
+        nationality: req.body.nationality,
+      });
+
+
+
       // create a new user
       const user = await userRepository.create({
         email: req.body.email,
         password: hashedPassword,
-        role
+        role,
+        meta,
+
       });
 
       // save the user
       await userRepository.save(user);
+      // window.location.reload();
 
       res.redirect("/login");
     }
