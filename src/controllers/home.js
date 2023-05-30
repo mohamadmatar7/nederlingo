@@ -47,6 +47,7 @@ export const home = async (req, res) => {
   if (userRole === "Directeur") {
     res.render("directeur", {
       user: user,
+      classrooms: Class,
       classes: classes,
       meta: meta,
     });

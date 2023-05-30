@@ -3,10 +3,12 @@
   <a href="/overzicht">
   <ul class="sidebar">
     <li class="sidebar__item">
-      <img src="/images/icons/user.png" alt="" />
+      <img src="{{user.meta.avatar}}" alt="" />
       <div class="sidebar_personalia">
-        <strong>Mila Duterloo</strong>
-        <strong>Klas: 1a</strong>
+        <strong>{{ user.meta.firstname }} {{user.meta.lastname}}</strong>
+        <strong>
+{{user.role.label}}
+          </strong>
       </div>
       </a>
     </li>
@@ -64,6 +66,12 @@
       <a href="/afwezigheden">
         <img src="/images/icons/calendar.png" alt="afwezigheden" />
         <strong>Afwezigheden</strong>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/leerlingToevogen">
+        <img src="/images/icons/to-do-list.png" alt="leerlingToevogen" />
+        <strong>Leerling toev.</strong>
       </a>
     </li>
     <li class="sidebar__logout">

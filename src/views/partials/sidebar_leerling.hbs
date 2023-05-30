@@ -5,8 +5,10 @@
     <li class="sidebar__item">
       <img src="/images/icons/user.png" alt="" />
       <div class="sidebar_personalia">
-        <strong>Mila Duterloo</strong>
-        <strong>Klas: 1a</strong>
+        <strong>{{ user.meta.firstname }}</strong>
+        <strong>Klas:{{#each user.classrooms}}
+          {{this.label}}
+          {{/each}}</strong>
       </div>
       </a>
     </li>
