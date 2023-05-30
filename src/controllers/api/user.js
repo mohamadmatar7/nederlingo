@@ -2,8 +2,9 @@
  * The API controllers
  */
 
+
 import DataSource from "../../lib/DataSource.js";
-import { ILike } from 'typeorm';
+// import { ILike } from 'typeorm';
 export const getUsers = async (req, res, next) => {
   try {
     // get the repository
@@ -28,7 +29,7 @@ export const getUser = async (req, res, next) => {
     res.status(200).json(
       await userRepository.findOne({
         where: { id: req.params.id },
-        relations: ["meta", "role", "classrooms"],
+        relations: ["meta", "role", "classrooms", "absence"],
       })
     );
   } catch (e) {
@@ -75,6 +76,7 @@ export const updateUser = async (req, res, next) => {
     if (req.body.lastname) {
       user.meta.lastname = req.body.lastname;
     }
+
     // Save the updated user
     await usersRepository.save(user);
     return res.status(200).json(user);
@@ -84,23 +86,32 @@ export const updateUser = async (req, res, next) => {
 };
 
 
+export const postAvatar = async (req, res, next) => {
+  try {
+    const usersRepository = DataSource.getRepository("User");
+    const { id } = req.params;
+    // Get the user by id
+    const user = await usersRepository.findOne({
+      where: { id },
+      relations: ["meta", "role"],
+    });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    // Update the user's meta properties based on request body
+    if (req.file) {
+      user.meta.avatar = "/images/" + req.file.originalname;
+    }
+    console.log(req.file.originalname);
 
-// export const getUserByFirstName = async (req, res, next) => {
-//   try {
-//     // get the repository
-//     const userRepository = DataSource.getRepository("User");
-//     const firstName = req.params.firstname.toLowerCase(); 
-
-//     res.status(200).json(
-//       await userRepository.find({
-//         where: { meta: { firstname: ILike(`%${firstName}%`) } },
-//         relations: ["meta", "role", "class",],
-//       })
-//     );
-//   } catch (e) {
-//     next(e.message);
-//   }
-// };
+    // Save the updated user
+    await usersRepository.save(user);
+    // return res.status(200).json(user);
+    res.redirect("/");
+  } catch (e) {
+    next(e);
+  }
+};
 
 
 export const getUserByFirstName = async (req, res, next) => {
@@ -112,7 +123,7 @@ export const getUserByFirstName = async (req, res, next) => {
     res.status(200).json(
       await userRepository.createQueryBuilder("user")
         .leftJoinAndSelect("user.meta", "meta")
-        .where("UPPER(meta.firstname) LIKE :firstName", { firstName: `%${firstName}%` })
+        .where("UPPER(meta.firstname) LIKE :firstName", { firstName: `${firstName}%` })
         .leftJoinAndSelect("user.role", "role")
         .leftJoinAndSelect("user.classrooms", "classrooms")
         .getMany()
@@ -121,6 +132,33 @@ export const getUserByFirstName = async (req, res, next) => {
     next(e.message);
   }
 };
+
+
+
+export const AddUserToClass = async (req, res, next) => {
+  try {
+    const usersRepository = DataSource.getRepository("User");
+    const classroomRepository = DataSource.getRepository("Classroom");
+    const {userId, classId} = req.body;
+    const user = await usersRepository.findOneBy({ id: userId });
+    const classroom = await classroomRepository.findOne({
+      where: { id: classId },
+      relations: ["users"],
+    });
+    if (!user || !classroom) throw new Error("User or classroom not found");
+    if (classroom.users) {
+      classroom.users.push(user);
+    } else {
+      classroom.users = [user];
+    }
+    await classroomRepository.save(classroom);
+    return res.status(200).json(classroom);
+  } catch (e) {
+    next(e);
+  }
+};
+
+
 
 
 

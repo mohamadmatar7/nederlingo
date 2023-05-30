@@ -120,6 +120,14 @@ export const register = async (req, res) => {
       value: req.body?.religion ? req.body.religion : "",
       error: req.formErrorFields?.religion ? req.formErrorFields.religion : null,
     },
+    // {
+    //   name: "classrooms",
+    //   label: "Klas",
+    //   type: "text",
+    //   value: req.body?.classrooms ? req.body.classrooms : "",
+    //   error: req.formErrorFields?.classrooms ? req.formErrorFields.classrooms : null,
+    // },
+
 
 
   ];
@@ -129,6 +137,10 @@ export const register = async (req, res) => {
   const roles = await roleRepository.find();
   const metaRepository = await DataSource.getRepository("UserMeta");
   const meta = await metaRepository.find();
+  const classroomRepository = await DataSource.getRepository("Classroom");
+  const classrooms = await classroomRepository.find();
+
+
 
   // render the register page
   res.render("register", {
@@ -137,6 +149,7 @@ export const register = async (req, res) => {
     formErrors,
     roles,
     meta,
+    classrooms,
   });
 };
 

@@ -10,8 +10,7 @@ export const getClasses = async (req, res, next) => {
         relations: ["users", "users.meta"],
       });
   
-      req.classes = classes; // Store the classes in the request object
-      next(); // Call the next middleware
+      req.classes = classes;
     } catch (e) {
       next(e.message);
     }
