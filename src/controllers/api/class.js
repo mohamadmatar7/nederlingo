@@ -19,22 +19,30 @@ export const getClasses = async (req, res, next) => {
   
   
 
-export const getClass = async (req, res, next) => {
+  export const getClass = async (req, res, next) => {
     try {
-        // get the repository
-        const classRepository = DataSource.getRepository("Classroom");
-    
-        res.status(200).json(
-        await classRepository.findOne({
-            where: { id: req.params.id },
-            relations: ["users"],
-        })
-        );
+      // get the repository
+      const classRepository = DataSource.getRepository("Classroom");
+  
+      const classroom = await classRepository.findOne({
+        where: { id: req.params.id },
+        relations: ["users"],
+      });
+  
+      if (!classroom) {
+        const error = new Error("Classroom not found");
+        error.statusCode = 404;
+        throw error;
+      }
+  
+      req.classroom = classroom;
+  
+      next();
     } catch (e) {
-        next(e.message);
+      next(e);
     }
-    };
-
+  };  
+  
 export const deleteClass = async (req, res, next) => {
     try {
         const classRepository = DataSource.getRepository("Classroom");

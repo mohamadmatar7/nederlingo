@@ -18,6 +18,7 @@ import { file } from "./controllers/file.js";
 import { courses } from "./controllers/courses.js";
 import { coursesP } from "./controllers/coursesprincipal.js";
 import { classesP } from "./controllers/classesprincipal.js";
+import { classP } from "./controllers/classprincipal.js";
 import { dashboard } from "./controllers/overzicht.js";
 import {
   getUsers,
@@ -98,6 +99,7 @@ app.get("/login", login);
 app.get("/vakken", jwtAuth, getSubjects, courses);
 app.get("/allevakken", jwtAuth, getSubjectsP, coursesP);
 app.get("/alleklassen", jwtAuth, getClasses, classesP);
+app.get("/alleklassen/:id", jwtAuth, getClass, classP);
 app.get("/dossier", jwtAuth, file);
 app.get("/overzicht", jwtAuth, dashboard);
 app.get("/register", register);
