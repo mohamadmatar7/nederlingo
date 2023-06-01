@@ -6,6 +6,7 @@ import express from "express";
 import { create } from "express-handlebars";
 import bodyParser from "body-parser";
 import cookieparser from "cookie-parser";
+import methodOverride from "method-override";
 
 import { VIEWS_PATH } from "./consts.js";
 
@@ -15,6 +16,7 @@ import DataSource from "./lib/DataSource.js";
 // import actions from controllers
 import { home } from "./controllers/home.js";
 import { file } from "./controllers/file.js";
+import { fileD } from "./controllers/filedirecteur.js";
 import { courses } from "./controllers/courses.js";
 import { coursesP } from "./controllers/coursesprincipal.js";
 import { classesP } from "./controllers/classesprincipal.js";
@@ -71,6 +73,7 @@ import { saveAvatar } from "./middleware/avatar.js";
 
 const app = express();
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 /*
  * Tell Express to use the Cookie Parser
@@ -106,7 +109,9 @@ app.get("/allevakken", jwtAuth, getSubjectsP, coursesP);
 app.get("/alleklassen", jwtAuth, getClasses, classesP);
 app.get("/alleklassen/:id", jwtAuth, getClass, classP);
 app.get("/student/:id", jwtAuth, getUser, userP);
+app.delete("/users/:id", jwtAuth, deleteUser);
 app.get("/dossier", jwtAuth, file);
+app.get("/dossier-directeur", jwtAuth, fileD);
 app.get("/overzicht", jwtAuth, dashboard);
 app.get("/register", register);
 app.post("/register", registerAuthentication, postRegister, register, AddUserToClass);
@@ -121,7 +126,7 @@ app.get("/api/users", getUsers);
 app.get("/api/users/:id", getUser);
 app.delete("/api/users/:id", deleteUser);
 app.post("/api/users/:id",multer().single("avatar"), saveAvatar,postAvatar);
-app.put("/api/users/:id", updateUser);
+app.put("/users/:id", updateUser);
 app.get("/api/users/firstname/:firstname", getUserByFirstName);
 app.post("/api/users/addtoclass", AddUserToClass);
 
@@ -160,3 +165,5 @@ DataSource.initialize()
   .catch(function (error) {
     // console.log("Error: ", error);
   });
+
+  

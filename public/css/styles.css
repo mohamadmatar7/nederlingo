@@ -117,7 +117,7 @@ button {
 }
 
 strong {
-  font-weight: 700;
+  font-weight: bold;
   font-size: 1.1rem;
 }
 
@@ -448,6 +448,8 @@ ul.form-errors {
 .students-list li{
   border-bottom: 1px solid;
   padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 
@@ -457,7 +459,7 @@ ul.form-errors {
   padding: 2rem;
 }
 .container-students{
-  margin: 2rem;
+  margin: 0 2rem;
   width: 100%;
 }
 
@@ -471,4 +473,25 @@ ul.form-errors {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.btn-out {
+  background-color: rgb(231, 23, 23);
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in ;
+  border: none;
+  padding: 0.5rem;
+}
+
+.btn-out:hover {
+  background-color: #962b2bff;
+  color: rgb(255, 255, 255);
+}
+
+.column-class {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }

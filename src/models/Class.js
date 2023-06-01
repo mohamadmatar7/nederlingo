@@ -39,5 +39,10 @@ export default new EntitySchema({
       inverseSide: "classroom",
       cascade: true,
     },
+    role: {
+      target: "Role",
+      type: "many-to-one",
+      inverseSide: "users"
+    }
   },
 });

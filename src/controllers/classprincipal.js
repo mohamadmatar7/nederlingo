@@ -7,17 +7,36 @@ export const classP = async (req, res) => {
     });
   
     const classRepo = DataSource.getRepository("Classroom");
-    const classroom = await classRepo.findOne({
-      where: { id: req.params.id },
-      relations: ["users", "users.meta"],
+    const classroomWithTeacher = await classRepo.findOne({
+      where: { 
+        id: req.params.id, 
+        users: {
+          role: {
+            label: "Lesgever"
+          }
+        }
+      }, 
+      relations: ["users", "users.meta", "users.role"],
     });
-    console.log(classroom);
+
+    const classroomWithStudent = await classRepo.findOne({
+      where: { 
+        id: req.params.id, 
+        users: {
+          role: {
+            label: "Leerling"
+          }
+        }
+      }, 
+      relations: ["users", "users.meta", "users.role"],
+    });
   
     res.render("klasdetailsdirecteur", {
       actSidebar: "Klassen",
       user: req.user,
       meta: meta,
-      classroom: classroom,
+      classroomTeacher: classroomWithTeacher, 
+      classroomStudents: classroomWithStudent 
     });
   };
   

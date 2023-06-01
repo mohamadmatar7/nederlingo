@@ -72,6 +72,7 @@ async function renderUsers(users) {
     .map((user) => {
       return `
       <li class="card" data-username="${user.id}">
+        <a href="/student/${user.id}">
         <img src="${user.meta.avatar}" alt="">
         <h4>${user.meta.firstname} ${user.meta.lastname}</h4>
         <h5>${user.role.label}</h5>
@@ -79,7 +80,7 @@ async function renderUsers(users) {
           (clas) => {
             return `${clas.label}`;
           }
-        ).join("")}</h6></li>
+        ).join("")}</h6></a></li>
       `;
     })
     .join("");

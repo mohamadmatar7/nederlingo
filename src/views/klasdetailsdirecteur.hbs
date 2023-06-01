@@ -2,13 +2,49 @@
 
 
    {{>sidebar_directeur}}
+   <div class="column-class">
+      <div class="container-students">
+    <h1>Leerkrachten</h1>
+<ul class="students-list">
+  {{#each classroomTeacher.users}}
+    <li>
+      <a class="link-student" href="/student/{{this.id}}">
+        <img src="{{this.meta.avatar}}" alt="">
+        {{this.meta.firstname}} {{this.meta.lastname}}
+      </a>
+<form action="/users/{{this.id}}?_method=DELETE" method="post" onsubmit="return confirmDelete()">
+  <input class="btn-out" type="submit" value="Uitschrijven">
+</form>
+
+    </li>
+  {{/each}}
+</ul>
+
+</div>
    <div class="container-students">
     <h1>Studenten</h1>
 <ul class="students-list">
-  {{#each classroom.users}}
-    <li> <a class="link-student" href="/student/{{this.id}}"><img src="{{this.meta.avatar}}" alt=""> {{this.meta.firstname}} {{this.meta.lastname}}</a></li>
+  {{#each classroomStudents.users}}
+    <li>
+      <a class="link-student" href="/student/{{this.id}}">
+        <img src="{{this.meta.avatar}}" alt="">
+        {{this.meta.firstname}} {{this.meta.lastname}}
+      </a>
+<form action="/users/{{this.id}}?_method=DELETE" method="post" onsubmit="return confirmDelete()">
+  <input class="btn-out" type="submit" value="Uitschrijven">
+</form>
+
+    </li>
   {{/each}}
 </ul>
+
+</div>
 </div>
 
 </div>
+
+<script>
+  function confirmDelete() {
+    return confirm("Weet je zeker dat je deze student wilt uitschrijven?");
+  }
+</script>

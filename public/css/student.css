@@ -103,8 +103,10 @@ body {
 .detail-card--text {
   width: 70%;
   align-items: center;
-  justify-content: center;
   margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .detail-card--profile-picture {
@@ -117,6 +119,8 @@ body {
 
 .detail-card--profile-picture img {
   border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
 }
 
 // .main-container.dossier {

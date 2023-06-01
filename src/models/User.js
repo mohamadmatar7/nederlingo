@@ -30,6 +30,7 @@ export default new EntitySchema({
       type: "many-to-one",
       joinColumn: true,
       inverseSide: "users",
+      // cascade: true
     },
     // absence: {
     //   target: "Absence",

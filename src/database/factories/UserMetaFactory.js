@@ -10,7 +10,7 @@ class UserMetaFactory extends Factory {
             username: faker.internet.userName(),
             avatar: faker.image.avatar(),
             birthday: faker.date.past(),
-            gender: faker.helpers.arrayElement(['man', 'vrouw']),
+            gender: faker.helpers.arrayElement(['Man', 'Vrouw']),
             religion: faker.helpers.arrayElement(['Moslim', 'Christen', 'Jood', 'Atheist',]),
             birthplace: faker.address.city() + ', ' + faker.address.country(),
             parent: faker.name.firstName() + ' ' + faker.name.lastName(),

@@ -8,12 +8,7 @@ export const userP = async (req, res) => {
     });
 
     const meta = user.meta;
-
-    const classRepo = DataSource.getRepository("Classroom");
-    const classroom = await classRepo.findOne({
-        where: { id: req.params.id },
-        relations: ["users", "users.meta"],
-    });
+    const classroom = user.classrooms
 
     res.render("studentdetaildirecteur", {
         actSidebar: "Klassen",
