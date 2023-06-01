@@ -114,7 +114,13 @@ app.get("/dossier", jwtAuth, file);
 app.get("/dossier-directeur", jwtAuth, fileD);
 app.get("/overzicht", jwtAuth, dashboard);
 app.get("/register", register);
-app.post("/register", registerAuthentication, postRegister, register, AddUserToClass);
+app.post(
+  "/register",
+  registerAuthentication,
+  postRegister,
+  register,
+  AddUserToClass
+);
 app.post("/login", loginAuthentication, postLogin, login);
 app.post("/logout", logout);
 
@@ -125,10 +131,10 @@ app.post("/logout", logout);
 app.get("/api/users", getUsers);
 app.get("/api/users/:id", getUser);
 app.delete("/api/users/:id", deleteUser);
-app.post("/api/users/:id",multer().single("avatar"), saveAvatar,postAvatar);
+app.post("/users/addtoclass", AddUserToClass);
+app.post("/api/users/:id", multer().single("avatar"), saveAvatar, postAvatar);
 app.put("/users/:id", updateUser);
 app.get("/api/users/firstname/:firstname", getUserByFirstName);
-app.post("/api/users/addtoclass", AddUserToClass);
 
 //Classes routes
 app.get("/api/classes", getClasses);
@@ -165,5 +171,3 @@ DataSource.initialize()
   .catch(function (error) {
     // console.log("Error: ", error);
   });
-
-  

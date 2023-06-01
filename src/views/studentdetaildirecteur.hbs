@@ -2,6 +2,7 @@
 
     {{>sidebar_directeur}}
 
+
     <div class="main-container dossier">
 
 
@@ -98,6 +99,47 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="test">
+    <select name="classrooms">classrooms: 
+    {{#each allclassrooms}}
+    <option value="{{ this.id }}">{{ this.label }}</option>
+    {{/each}}
+</select>
+<button id="test" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">add gebruiker</button>
+</div>
+
+
+
+<script>
+    // function add user to classroom
+    const addClassroom = document.getElementById('test');
+    addClassroom.addEventListener('click', function() {
+        const classroomId = document.querySelector('select[name="classrooms"]').value;
+        const userId = addClassroom.getAttribute('data-id');
+        console.log(classroomId);
+        console.log(userId);
+        fetch(`/users/addtoclass`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    classId: classroomId,
+                    userId: userId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+</script>
 
 
 

@@ -2,9 +2,8 @@
  * The API controllers
  */
 
-
 import DataSource from "../../lib/DataSource.js";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 // import { ILike } from 'typeorm';
 export const getUsers = async (req, res, next) => {
   try {
@@ -27,17 +26,16 @@ export const getUser = async (req, res, next) => {
     // get the repository
     const userRepository = DataSource.getRepository("User");
 
-      const users= await userRepository.findOne({
-        where: { id: req.params.id },
-        relations: ["meta", "role", "classrooms",],
-      })
-      req.users = users;
-      next();
+    const users = await userRepository.findOne({
+      where: { id: req.params.id },
+      relations: ["meta", "role", "classrooms"],
+    });
+    req.users = users;
+    next();
   } catch (e) {
     next(e.message);
   }
 };
-
 
 export const deleteUser = async (req, res, next) => {
   try {
@@ -54,7 +52,6 @@ export const deleteUser = async (req, res, next) => {
       return res.status(404).json("User not found");
     }
     await usersRepository.remove(user);
-
 
     res.redirect("/alleklassen");
   } catch (e) {
@@ -98,8 +95,6 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
-
-
 export const postAvatar = async (req, res, next) => {
   try {
     const usersRepository = DataSource.getRepository("User");
@@ -126,7 +121,6 @@ export const postAvatar = async (req, res, next) => {
   }
 };
 
-
 export const getUserByFirstName = async (req, res, next) => {
   try {
     // Get the repository
@@ -138,7 +132,9 @@ export const getUserByFirstName = async (req, res, next) => {
       .leftJoinAndSelect("user.meta", "meta")
       .where("UPPER(meta.firstname) LIKE :firstName", { firstName: `${name}%` })
       .orWhere("UPPER(meta.lastname) LIKE :lastName", { lastName: `${name}%` })
-      .orWhere("UPPER(meta.firstname || ' ' || meta.lastname) LIKE :lastName", { lastName: `${name}%` })
+      .orWhere("UPPER(meta.firstname || ' ' || meta.lastname) LIKE :lastName", {
+        lastName: `${name}%`,
+      })
       .leftJoinAndSelect("user.role", "role")
       .leftJoinAndSelect("user.classrooms", "classrooms")
       .getMany();
@@ -150,10 +146,12 @@ export const getUserByFirstName = async (req, res, next) => {
 };
 
 export const AddUserToClass = async (req, res, next) => {
+  console.log("test", req);
   try {
     const usersRepository = DataSource.getRepository("User");
     const classroomRepository = DataSource.getRepository("Classroom");
-    const {userId, classId} = req.body;
+    const { userId, classId } = req.body;
+
     const user = await usersRepository.findOneBy({ id: userId });
     const classroom = await classroomRepository.findOne({
       where: { id: classId },
@@ -171,15 +169,3 @@ export const AddUserToClass = async (req, res, next) => {
     next(e);
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
