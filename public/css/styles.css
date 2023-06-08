@@ -137,7 +137,7 @@ button {
 }
 
 strong {
-  font-weight: 700;
+  font-weight: bold;
   font-size: 1.1rem;
 }
 
@@ -470,6 +470,8 @@ strong {
 .students-list li {
   border-bottom: 1px solid;
   padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .students-list {
@@ -493,3 +495,31 @@ strong {
   align-items: center;
   gap: 1rem;
 }
+
+.btn-out {
+  background-color: rgb(231, 23, 23);
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in ;
+  border: none;
+  padding: 0.5rem;
+}
+
+.btn-out:hover {
+  background-color: #962b2bff;
+  color: rgb(255, 255, 255);
+}
+
+.column-class {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.attendance-submitted .attendance-button {
+  background-color: #f0f0f0;
+  color: #555555;
+  cursor: not-allowed;
+}
+

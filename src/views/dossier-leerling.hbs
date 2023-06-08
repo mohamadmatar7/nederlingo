@@ -1,17 +1,11 @@
 <div class="container">
-
     {{>sidebar_leerling}}
-
+    
     <div class="main-container dossier">
-
-
         <div class="welcome-label">
             <h1>Bekijk je dossier!</h1>
         </div>
-
         <div class="container-dossier">
-
-
             <div class="icon-card">
                 <div class="icon-card--label">
                     <a href="/rapport">
@@ -22,7 +16,6 @@
                     <img src="/images/icons/rapport.png" alt="nederlands" />
                 </div>
             </div>
-
             <div class="icon-card">
                 <div class="icon-card--label">
                     <a href="/aankondigingen">
@@ -33,7 +26,6 @@
                     <img src="/images/icons/aankondigingen.png" alt="nederlands" />
                 </div>
             </div>
-
             <div class="icon-card">
                 <div class="icon-card--label">
                     <a href="/details">
@@ -44,7 +36,6 @@
                     <img src="/images/icons/details.png" alt="details" />
                 </div>
             </div>
-
             <div class="detail-card">
                 <div class="detail-card--label">
                     <a href="/details">
@@ -63,52 +54,54 @@
                     </div>
                 </div>
             </div>
-
             <div class="detail-card">
                 <div class="detail-card--label">
                     <a href="/details">
                         <h3>Laatste aankondigingen deze maand</h3>
                     </a>
                 </div>
-
-             <div class="news-card--information">
-                <div>
-                    <img src="/images//icons//megaphone.png" alt="megaphone">
+                <div class="news-card--information">
+                    <div>
+                        <img src="/images//icons//megaphone.png" alt="megaphone">
+                    </div>
+                    <div class="news-card--title">
+                        <h4>Les Uitval</h4>
+                        <p> De les van aanstaande maandag aanstaande valt uit vanwege ziekte...</p>
+                    </div>
+                    <div class="news-card--title">
+                        <h4>Geplaatst op:</h4>
+                        <p> 12 mei 2023 19:00</p>
+                    </div>
                 </div>
-                <div class="news-card--title">
-                     <h4>Les Uitval</h4>
-                     <p> De les van aanstaande maandag aanstaande valt uit vanwege ziekte...</p>
-                    </div>
-               
-                <div class="news-card--title">
-                     <h4>Geplaatst op:</h4>
-                     <p> 12 mei 2023 19:00</p>
-                    </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
- {{!-- <div class="news-card">
-             <div class="detail-card--label">
-               <a href="/details">
-                 <h3>Laatste aankondigingen deze maand</h3>
-               </a>
+
+
+
+
+
+    {{!-- <div class="news-card">
+        <div class="detail-card--label">
+            <a href="/details">
+                <h3>Laatste aankondigingen deze maand</h3>
+            </a>
         </div>
-                    
-                    
-                    <div class="news-card--information">
-                        <img src="/images//icons//megaphone.png" alt="megaphone">
-                     <p>Les Uitval</p>
-                     <p> De les van aanstaande maandag aanstaande valt uit vanwege ziekte...</p>
-                    </div>
-                    <div class="detail-card--text">
-                        <p>{{ meta.firstname }} {{ meta.lastname }} </p>
-                        <p>{{ meta.birthday }} {{ meta.birthplace }} </p>
-                        <p>{{ meta.nationality }} </p>
-                        <p>{{ meta.gender }} </p>
-                    </div>
 
-                </div> --}}
+
+        <div class="news-card--information">
+            <img src="/images//icons//megaphone.png" alt="megaphone">
+            <p>Les Uitval</p>
+            <p> De les van aanstaande maandag aanstaande valt uit vanwege ziekte...</p>
+        </div>
+        <div class="detail-card--text">
+            <p>{{ meta.firstname }} {{ meta.lastname }} </p>
+            <p>{{ meta.birthday }} {{ meta.birthplace }} </p>
+            <p>{{ meta.nationality }} </p>
+            <p>{{ meta.gender }} </p>
+        </div>
+
+    </div> --}}

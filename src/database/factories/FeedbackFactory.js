@@ -14,6 +14,10 @@ class FeebackFactory extends Factory {
 
     async make() {
         await this.makeMany();
+        const randIndex = Math.floor(Math.random()*this.feedback.length);
+        return {
+            "content": this.feedback[randIndex]
+        }
     }
 
     async makeMany(amount = 1) {
@@ -29,6 +33,7 @@ class FeebackFactory extends Factory {
         const FeedRepo = DataSource.getRepository("Feedback");
 
         let record = await FeedRepo.findOne({where: { content }});
+        console.log('record', record)
         if (record) return record;
 
         record = await FeedRepo.save({ content });

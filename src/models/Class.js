@@ -39,5 +39,11 @@ export default new EntitySchema({
       inverseSide: "classroom",
       cascade: true,
     },
+    attendances: {
+      target: "Attendance",
+      type: "one-to-many",
+      cascade: true,
+      inverseSide: "classroom",
+  },
   },
 });

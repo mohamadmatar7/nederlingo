@@ -23,8 +23,8 @@ class UserFactory extends Factory {
 
         const userMeta = await UserMetaFactory.make();
         const subjects = await SubjectFactory.make();
-        const feedback = await FeedbackFactory.make();
-    
+        const feedback = await FeedbackFactory.make(); // Wrap the feedback in an array
+    console.log("hallo, waar is feebdack", feedback)
         const user = {
             email: faker.internet.email(),
             password: faker.internet.password(),
@@ -34,7 +34,7 @@ class UserFactory extends Factory {
             subjects: [subjects],
             feedback: feedback
         };
-        // console.log(user)
+        console.log(user)
     
         const record = await this.insert(user, randomRole, randomClass, [subjects], feedback);
         console.log(record)
@@ -54,6 +54,8 @@ class UserFactory extends Factory {
         let record = await repo.findOne({where: {email: user.email}});
         if (record) return record;
     
+        console.log("feedback: ", feedback);
+
         const roleRecord = await RoleFactory.insert(role);
         const classRecord = await ClassFactory.insert(classes);
         const subjectRecord = await SubjectFactory.insert(subjects);

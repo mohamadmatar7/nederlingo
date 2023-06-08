@@ -7,7 +7,7 @@ export const getAllFeedback = async (req, res, next) => {
         res.status(200).json(
         await feedbackRepository.find({
             where: { id: null },
-            relations: ["users"],
+            relations: ["user"],
         })
         );
     } catch (e) {
@@ -15,33 +15,50 @@ export const getAllFeedback = async (req, res, next) => {
     }
     };
 
-export const getFeedback = async (req, res, next) => {
-    try {
-        // get the repository
-        const feedbackRepository = DataSource.getRepository("Feedback");
-        res.status(200).json(
-        await feedbackRepository.findOne({
+    export const getFeedback = async (req, res, next) => {
+        try {
+          const feedbackRepository = DataSource.getRepository("Feedback");
+          const feedback = await feedbackRepository.findOne({
             where: { id: req.params.id },
-            relations: ["users"],
-        })
-        );
-    } catch (e) {
-        next(e.message);
-    }
-    };
+            relations: ["user"],
+          });
+          if (feedback) {
+            req.feedback = feedback;
+            next();
+          } else {
+            res.status(404).json({ error: "Feedback not found" });
+          }
+        } catch (e) {
+          next(e.message);
+        }
+      };      
 
 export const postFeedback = async (req, res, next) => {
     try {
-        // get the repository
-        const feedbackRepository = DataSource.getRepository("Feedback");
-        const feedback = await feedbackRepository.create(req.body);
-        await feedbackRepository.save(feedback);
-        res.status(200).json(feedback);
+      const userRepository = DataSource.getRepository("User");
+      const feedbackRepository = DataSource.getRepository("Feedback");
+  
+      const user = await userRepository.findOne({
+        where: {id: req.params.id}
+      });
+  
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      const feedback = feedbackRepository.create({
+        content: req.body.content,
+        user: user,
+      });
+  
+      await feedbackRepository.save(feedback);
+  
+      res.status(200).json(feedback);
+    } catch (e) {
+      next(e.message);
     }
-    catch (e) {
-        next(e.message);
-    }
-    };
+  };
+  
 
 export const updateFeedback = async (req, res, next) => {
     try {

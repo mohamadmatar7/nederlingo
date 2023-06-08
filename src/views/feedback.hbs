@@ -1,0 +1,13 @@
+<div class="container">
+
+   {{>sidebar_leerling}}
+
+{{#each feedback}}
+  <li class="icon-card">
+    <div class="icon-card--label">
+      <h2>{{this.content}}</h2>
+    </div>
+  </li>
+{{/each}}
+
+</div>

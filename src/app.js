@@ -6,6 +6,7 @@ import express from "express";
 import { create } from "express-handlebars";
 import bodyParser from "body-parser";
 import cookieparser from "cookie-parser";
+import methodOverride from "method-override";
 
 import { VIEWS_PATH } from "./consts.js";
 
@@ -15,11 +16,17 @@ import DataSource from "./lib/DataSource.js";
 // import actions from controllers
 import { home } from "./controllers/home.js";
 import { file } from "./controllers/file.js";
+import { fileD } from "./controllers/filedirecteur.js";
 import { courses } from "./controllers/courses.js";
 import { coursesP } from "./controllers/coursesprincipal.js";
 import { classesP } from "./controllers/classesprincipal.js";
+import { userP } from "./controllers/studentfile.js";
 import { classP } from "./controllers/classprincipal.js";
+import { feedbackR } from "./controllers/feedbackpage.js";
 import { dashboard } from "./controllers/overzicht.js";
+import { getAbsence, getAbsences,  postAbsence } from "./controllers/api/absence.js";
+import { postAttendance } from "./controllers/api/attendance.js"
+
 import {
   getUsers,
   getUser,
@@ -27,6 +34,7 @@ import {
   updateUser,
   getUserByFirstName,
   AddUserToClass,
+  changeUserClass,
   postAvatar,
 } from "./controllers/api/user.js";
 import {
@@ -67,9 +75,11 @@ import {
 } from "./controllers/api/feedback.js";
 import multer from "multer";
 import { saveAvatar } from "./middleware/avatar.js";
+import { absenceR } from "./controllers/absences.js";
 
 const app = express();
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 /*
  * Tell Express to use the Cookie Parser
@@ -103,11 +113,22 @@ app.get("/login", login);
 app.get("/vakken", jwtAuth, getSubjects, courses);
 app.get("/allevakken", jwtAuth, getSubjectsP, coursesP);
 app.get("/alleklassen", jwtAuth, getClasses, classesP);
+app.get("/afwezigheden", jwtAuth, getAbsence, absenceR);
 app.get("/alleklassen/:id", jwtAuth, getClass, classP);
+app.get("/user/:id", jwtAuth, getUser, userP);
+app.delete("/users/:id", jwtAuth, deleteUser);
+app.get("/feedback", jwtAuth, getFeedback, feedbackR);
 app.get("/dossier", jwtAuth, file);
+app.get("/dossier-directeur", jwtAuth, fileD);
 app.get("/overzicht", jwtAuth, dashboard);
 app.get("/register", register);
-app.post("/register", registerAuthentication, postRegister, register);
+app.post(
+  "/register",
+  registerAuthentication,
+  postRegister,
+  register,
+  AddUserToClass
+);
 app.post("/login", loginAuthentication, postLogin, login);
 app.post("/logout", logout);
 
@@ -116,12 +137,16 @@ app.post("/logout", logout);
  */
 //Users routes
 app.get("/api/users", getUsers);
+app.get("/absence", getAbsences);
+app.get("/absence/:id", getAbsence);
+app.post("/absence", postAbsence);
 app.get("/api/users/:id", getUser);
 app.delete("/api/users/:id", deleteUser);
-app.post("/api/users/:id",multer().single("avatar"), saveAvatar,postAvatar);
-app.put("/api/users/:id", updateUser);
+app.post("/users/addtoclass", AddUserToClass);
+app.put("/users/changeclass", changeUserClass);
+app.post("/api/users/:id", multer().single("avatar"), saveAvatar, postAvatar);
+app.put("/users/:id", updateUser);
 app.get("/api/users/firstname/:firstname", getUserByFirstName);
-app.post("/api/users/addtoclass", AddUserToClass);
 
 //Classes routes
 app.get("/api/classes", getClasses);
@@ -136,12 +161,13 @@ app.get("/api/allsubjects", getSubjectsP);
 app.get("/api/subjects/:id", getSubject);
 app.delete("/api/subjects/:id", deleteSubject);
 app.post("/api/subjects", postSubject);
+app.post("/attendance/:id", postAttendance);
 
 //Feedbacks routes
 app.get("/api/feedback", getAllFeedback);
-app.get("/api/feedback/:id", getFeedback);
+// app.get("/api/feedback/:id", getFeedback);
 app.delete("/api/feedback/:id", deleteFeedback);
-app.post("/api/feedback", postFeedback);
+app.post("/feedback/:id", postFeedback);
 app.put("/api/feedback/:id", updateFeedback);
 
 // Oefeningen
