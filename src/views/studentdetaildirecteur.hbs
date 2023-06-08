@@ -75,6 +75,23 @@
                 </div>
             </div>
 
+                            <div class="detail-card">
+                <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>Afwezigheden</h3>
+                    </a>
+                </div>
+                <div class="detail-card--information">
+                    <div class="detail-card--text">
+                {{#each absences}}
+                <ul>
+                    <li><strong>Reden:</strong> {{this.reason}} <strong>Datum:</strong> {{this.date}}</li>
+                </ul>
+                {{/each}}
+                    </div>
+                </div>
+            </div>
+
             <div class="detail-card">
                 <div class="detail-card--label">
                     <a href="/details">
@@ -110,7 +127,18 @@
 </select>
 <button id="test" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">add gebruiker</button>
 </div>
-
+<form action="/feedback/{{ person.id }}" method="post">
+    <input name="feedback"></input>
+    <button id="add" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">Feedback sturen</button>
+</form>
+<div class="test">
+    <select name="classroomChange">
+    {{#each allclassrooms}}
+    <option value="{{ this.id }}">{{ this.label }}</option>
+    {{/each}}
+</select>
+<button id="change" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">klas veranderen</button>
+</div>
 
 
 <script>
@@ -139,9 +167,58 @@
                 console.error('Error:', error);
             });
     });
+
+        const changeClassroom = document.getElementById('change');
+    changeClassroom.addEventListener('click', function() {
+        const classroomId = document.querySelector('select[name="classroomChange"]').value;
+        const userId = changeClassroom.getAttribute('data-id');
+        console.log(classroomId);
+        console.log(userId);
+        fetch(`/users/changeclass`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    classId: classroomId,
+                    userId: userId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+    
+const addFeedback = document.getElementById('add');
+addFeedback.addEventListener('click', function(event) {
+  event.preventDefault();
+  const userId = addFeedback.getAttribute('data-id');
+  const result = document.querySelector('input[name="feedback"]').value;
+  console.log(result);
+  console.log(userId);
+  fetch(`/feedback/${userId}`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          content: result,
+      })
+  })
+  .then(response => response.json())
+  .then(data => {
+      window.location.reload();
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+});
+
 </script>
-
-
 
  {{!-- <div class="news-card">
              <div class="detail-card--label">

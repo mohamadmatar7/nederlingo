@@ -30,14 +30,7 @@ export default new EntitySchema({
       type: "many-to-one",
       joinColumn: true,
       inverseSide: "users",
-      // cascade: true
     },
-    // absence: {
-    //   target: "Absence",
-    //   type: "one -to-one",
-    //   cascade: true,
-    //   inverseSide: "user",
-    // },
     classrooms: {
       target: "Classroom",
       type: "many-to-many",
@@ -55,40 +48,22 @@ export default new EntitySchema({
         },
       },
     },
-    feedback: {
+    feedback: { 
       target: "Feedback",
-      type: "many-to-many",
+      type: "one-to-many", 
+      inverseSide: "user",
       cascade: true,
-      inverseSide: "users",
-      joinTable: {
-        name: "users_feedbacks",
-        joinColumn: {
-          name: "user_id",
-          referencedColumnName: "id",
-        },
-        inverseJoinColumn: {
-          name: "feedback_id",
-          referencedColumnName: "id",
-        },
-      },
     },
-
-    // subjects: {
-    //   target: "Subject",
-    //   type: "many-to-many",
-    //   cascade: true,
-    //   inverseSide: "users",
-    //   joinTable: {
-    //     name: "users_subjects",
-    //     joinColumn: {
-    //       name: "user_id",
-    //       referencedColumnName: "id",
-    //     },
-    //     inverseJoinColumn: {
-    //       name: "subject_id",
-    //       referencedColumnName: "id",
-    //     },
-    //   },
-    // },
+    absences: {
+      target: "Absence",
+      type: "one-to-many",
+      cascade: true,
+      inverseSide: "user",
+  },
+  students_present: {
+    target: "StudentsPresent",
+    type: "one-to-many",
+    inverseSide: "user",
+},
   },
 });

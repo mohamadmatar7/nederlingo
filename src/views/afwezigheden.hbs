@@ -1,0 +1,24 @@
+<div class="container">
+
+   {{>sidebar_leerling}}
+
+{{#each absences}}
+  <li class="icon-card">
+    <div class="icon-card--label">
+      <div>{{this.reason}}
+        <br>
+        <span>{{this.date}}</span>
+      </div>
+
+    </div>
+  </li>
+{{/each}}
+
+<form action="/absence" method="post">
+    <input type="hidden" name="user[id]" value="{{user.id}}">
+    <input required name="content" placeholder="Afwezigheid reden"></input>
+    <input required name="date" type="date"></input>
+    <button id="add" type="submit" class="save-button add-user-to-class">Afwezigheid bevestigen</button>
+</form>
+
+</div>

@@ -8,7 +8,7 @@
 <ul class="students-list">
   {{#each classroomTeacher.users}}
     <li>
-      <a class="link-student" href="/student/{{this.id}}">
+      <a class="link-student" href="/user/{{this.id}}">
         <img src="{{this.meta.avatar}}" alt="">
         {{this.meta.firstname}} {{this.meta.lastname}}
       </a>
@@ -26,25 +26,120 @@
 <ul class="students-list">
   {{#each classroomStudents.users}}
     <li>
-      <a class="link-student" href="/student/{{this.id}}">
+      <a class="link-student" href="/user/{{this.id}}">
         <img src="{{this.meta.avatar}}" alt="">
         {{this.meta.firstname}} {{this.meta.lastname}}
       </a>
-<form action="/users/{{this.id}}?_method=DELETE" method="post" onsubmit="return confirmDelete()">
-  <input class="btn-out" type="submit" value="Uitschrijven">
-</form>
-
+      <!-- Rectangular switch -->
+      <label class="switch"> <!-- if present, add checked attribute to inputchecbkox -->
+        <input data-id="{{this.id}}" type="checkbox" class="toggleStatus" name="status" value="present">
+        <span class="slider"></span>
+      </label>
+      <form action="/users/{{this.id}}?_method=DELETE" method="post" onsubmit="return confirmDelete()">
+        <input class="btn-out" type="submit" value="Uitschrijven">
+      </form>
     </li>
   {{/each}}
 </ul>
+</div>
+</div>
+</div>
 
-</div>
-</div>
+<style>
 
-</div>
+  /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
 
 <script>
   function confirmDelete() {
     return confirm("Weet je zeker dat je deze student wilt uitschrijven?");
   }
+  
+  const toggles = document.querySelectorAll('.toggleStatus');
+  toggles.forEach(toggle => {
+    const userId = toggle.dataset.id;
+    const data = {
+      status: 'present',
+      userId: userId
+    };
+
+    toggle.addEventListener('change', (e) => {
+      alert('je hebt aanwezigheid veranderd naar ' + toggle.checked);
+      const response = fetch(`/attendance/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: {
+          status: toggle.checked ? 'present' : 'absent',
+          userId: userId
+        }
+      }).then((res) => res.json())
+      .then(data => {
+        console.log(data);
+      })
+    });
+  });
+
 </script>

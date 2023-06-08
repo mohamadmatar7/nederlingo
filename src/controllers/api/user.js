@@ -28,7 +28,7 @@ export const getUser = async (req, res, next) => {
 
     const users = await userRepository.findOne({
       where: { id: req.params.id },
-      relations: ["meta", "role", "classrooms"],
+      relations: ["meta", "role", "classrooms", "feedback"],
     });
     req.users = users;
     next();
@@ -169,3 +169,38 @@ export const AddUserToClass = async (req, res, next) => {
     next(e);
   }
 };
+// create a function to change a user's class
+export const changeUserClass = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const usersRepository = DataSource.getRepository("User");
+    const classroomRepository = DataSource.getRepository("Classroom");
+    const { userId, classId } = req.body;
+    console.log('we got classId: ', classId)
+
+    const user = await usersRepository.findOne({where: { id: userId}, relations: ["classrooms"] });
+    const classroom = await classroomRepository.findOne({
+      where: { id: classId },
+      relations: ["users"],
+    });
+    if (!user || !classroom) throw new Error("User or classroom not found");
+    
+    console.log('will update classroom of current user to', classroom.id)
+    user.classrooms = [
+      {
+        id: classroom.id
+      }
+    ];
+    await usersRepository.save(user);
+    
+    // if (classroom.users) {
+    //   classroom.users.push(user);
+    // } else {
+    //   classroom.users = [user];
+    // }
+    // await classroomRepository.save(classroom);
+    return res.status(200).json(classroom);
+  } catch (e) {
+    next(e);
+  }
+}

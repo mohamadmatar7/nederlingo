@@ -1,33 +1,31 @@
-// import typeorm from "typeorm";
+import typeorm from "typeorm";
+const { EntitySchema } = typeorm;
 
-// const { EntitySchema } = typeorm;
-
-// export default new EntitySchema({
-//     name: "Absence",
-//     tableName: "absence",
-//     columns: {
-//         id: {
-//             primary: true,
-//             type: "int",
-//             generated: true,
-//         },
-//         date: {
-//             type: "date",
-//         },
-//         reason: {
-//             type: "varchar",
-//         },
-//         // user: {
-//         //     type: "int",
-//         // },
-//     },
-//     relations: {
-//         user: {
-//             target: "User",
-//             type: "one-to-one",
-//             joinColumn: true,
-//             cascade: true,
-//             onDelete: "CASCADE",
-//         },
-//     },
-// });
+export default new EntitySchema({
+    name: "Absence",
+    tableName: "absence",
+    columns: {
+        id: {
+            primary: true,
+            type: "int",
+            generated: true,
+        },
+        reason: {
+            type: "varchar"
+        },
+        date: {
+            type: "date"
+        }
+    },
+    relations: {
+        user: {
+            target: "User",
+            type: "many-to-one",
+            inverseSide: "absence",
+            joinColumn: {
+                name: "user_id",
+            },
+            onDelete: "CASCADE",
+        }
+    },
+});

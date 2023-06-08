@@ -5,14 +5,16 @@ export const userP = async (req, res) => {
     const classRepo = DataSource.getRepository("Classroom");
     const user = await userRepo.findOne({
         where: { id: req.params.id },
-        relations: ["meta", "classrooms", "feedback",],
+        relations: ["meta", "classrooms", "feedback", "absences"],
     });
 
     const meta = user.meta;
-    const classroom = user.classrooms
-    const test = user.id
+    const classroom = user.classrooms;
+    const absences = user.absences
 
     const allclassrooms = await classRepo.find();
+
+    console.log(req.user);
 
 
     res.render("studentdetaildirecteur", {
@@ -22,6 +24,7 @@ export const userP = async (req, res) => {
         classrooms: classroom,
         allclassrooms: allclassrooms,
         person: user,
+        absences: absences
     });
 };
 

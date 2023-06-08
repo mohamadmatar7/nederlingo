@@ -495,3 +495,10 @@ ul.form-errors {
   flex-direction: column;
   width: 80%;
 }
+
+.attendance-submitted .attendance-button {
+  background-color: #f0f0f0;
+  color: #555555;
+  cursor: not-allowed;
+}
+

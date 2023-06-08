@@ -16,8 +16,6 @@ export const getClasses = async (req, res, next) => {
       next(e.message);
     }
   };
-  
-  
 
   export const getClass = async (req, res, next) => {
     try {
