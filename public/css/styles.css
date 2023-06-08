@@ -2,7 +2,16 @@
  * Import other CSS
  */
 
- @font-face {
+:root {
+  --gap--card: 0.9375rem;
+  --blue--main: #aee0f2;
+  --pastel--blue: #d7ecf2;
+  --pastel--orange: #ffeee2;
+  --dark--blue: #084d61;
+  --orange: #ffaf76;
+}
+
+@font-face {
   font-family: "Lato";
   src: url("../fonts/LatoRegular.woff2") format("woff2"),
     url("../fonts/LatoRegular.woff") format("woff");
@@ -42,6 +51,15 @@
   unicode-range: U+0020-00FE;
 }
 
+/* oswald-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/oswald-v49-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 @import url("reset.css");
 
 html {
@@ -65,7 +83,7 @@ body#authentication {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #c9eddc;
+  background-color: #aee0f2;
 }
 
 p {
@@ -74,9 +92,10 @@ p {
 
 h1,
 h2 {
-  font-family: "Sriracha";
-  font-weight: 400;
+  font-family: "Oswald";
   font-style: normal;
+  font-weight: 400;
+  text-align: center;
 }
 h3,
 h4,
@@ -84,6 +103,7 @@ h5 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
   line-height: 1.3;
+  columns: var(--dark--blue);
 }
 
 h1 {
@@ -369,10 +389,14 @@ ul.form-errors {
   padding: 7px;
 }
 
+strong {
+  color: var(--dark--blue);
+}
+
 /* CSS */
 .button-base {
-  background-color: #ffc800;
-  border-radius: 12px;
+  background-color: #ffaf76;
+  border-radius: 10px;
   color: #000;
   cursor: pointer;
   font-weight: bold;
@@ -390,8 +414,7 @@ ul.form-errors {
 
 .button-base:not(:disabled):hover,
 .button-base:not(:disabled):focus {
-  outline: 0;
-  background: #f7d558;
+  background: var(--pastel--orange);
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -444,24 +467,22 @@ ul.form-errors {
   width: 15rem;
 }
 
-
-.students-list li{
+.students-list li {
   border-bottom: 1px solid;
   padding: 0.5rem 0;
 }
-
 
 .students-list {
   background-color: white;
   border-radius: 2rem;
   padding: 2rem;
 }
-.container-students{
+.container-students {
   margin: 2rem;
   width: 100%;
 }
 
-.students-list img{
+.students-list img {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
