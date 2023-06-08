@@ -24,8 +24,12 @@ import { userP } from "./controllers/studentfile.js";
 import { classP } from "./controllers/classprincipal.js";
 import { feedbackR } from "./controllers/feedbackpage.js";
 import { dashboard } from "./controllers/overzicht.js";
-import { getAbsence, getAbsences,  postAbsence } from "./controllers/api/absence.js";
-import { postAttendance } from "./controllers/api/attendance.js"
+import {
+  getAbsence,
+  getAbsences,
+  postAbsence,
+} from "./controllers/api/absence.js";
+import { postAttendance } from "./controllers/api/attendance.js";
 
 import {
   getUsers,
@@ -74,8 +78,21 @@ import {
   updateFeedback,
 } from "./controllers/api/feedback.js";
 import multer from "multer";
+
+// vakken import
+import { nederlands_algemeen } from "./controllers/nederlands_algemeen.js";
 import { saveAvatar } from "./middleware/avatar.js";
 import { absenceR } from "./controllers/absences.js";
+import { nederlands_schrijven } from "./controllers/nederlands_schrijven.js";
+import { nederlands_grammatica } from "./controllers/nederlands_grammatica.js";
+import { nederlands_geschiedenis } from "./controllers/nederlands_geschiedenis.js";
+import { nederlands_cultuur } from "./controllers/nederlands_cultuur.js";
+import { rekentaal } from "./controllers/rekentaal.js";
+import { feedback } from "./controllers/feedback.js";
+import { afwezigheden } from "./controllers/afwezigheden.js";
+import { rapport } from "./controllers/rapport.js";
+import { aankondigingen } from "./controllers/aankondigingen.js";
+import { details } from "./controllers/details.js";
 
 const app = express();
 app.use(express.static("public"));
@@ -110,7 +127,7 @@ app.set("views", VIEWS_PATH);
 
 app.get("/", jwtAuth, home);
 app.get("/login", login);
-app.get("/vakken", jwtAuth, getSubjects, courses);
+// app.get("/vakken", jwtAuth, getSubjects, courses);
 app.get("/allevakken", jwtAuth, getSubjectsP, coursesP);
 app.get("/alleklassen", jwtAuth, getClasses, classesP);
 app.get("/afwezigheden", jwtAuth, getAbsence, absenceR);
@@ -132,6 +149,26 @@ app.post(
 app.post("/login", loginAuthentication, postLogin, login);
 app.post("/logout", logout);
 
+// Vakken routes
+app.get("/nederlands-algemeen", jwtAuth, nederlands_algemeen);
+app.get("/nederlands-schrijven", jwtAuth, nederlands_schrijven);
+app.get("/nederlands-grammatica", jwtAuth, nederlands_grammatica);
+app.get("/nederlands-geschiedenis", jwtAuth, nederlands_geschiedenis);
+app.get("/nederlands-cultuur", jwtAuth, nederlands_cultuur);
+app.get("/rekentaal", jwtAuth, rekentaal);
+
+// sidebar
+app.get("/vakken", jwtAuth, getSubjects, courses);
+app.get("/dossier", jwtAuth, file);
+app.get("/overzicht", jwtAuth, dashboard);
+app.get("/feedback", jwtAuth, feedback);
+app.get("/afwezigheden", jwtAuth, afwezigheden);
+
+// routings van dossier
+app.get("/rapport", jwtAuth, rapport);
+app.get("/aankondigingen", jwtAuth, aankondigingen);
+app.get("/details", jwtAuth, details);
+
 /**
  * API Routing
  */
@@ -146,6 +183,8 @@ app.post("/users/addtoclass", AddUserToClass);
 app.put("/users/changeclass", changeUserClass);
 app.post("/api/users/:id", multer().single("avatar"), saveAvatar, postAvatar);
 app.put("/users/:id", updateUser);
+app.post("/api/users/:id", multer().single("avatar"), saveAvatar, postAvatar);
+app.put("/api/users/:id", updateUser);
 app.get("/api/users/firstname/:firstname", getUserByFirstName);
 
 //Classes routes

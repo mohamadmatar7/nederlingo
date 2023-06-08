@@ -2,12 +2,28 @@
 
    {{>sidebar_leerling}}
 
-{{#each feedback}}
-  <li class="icon-card">
-    <div class="icon-card--label">
-      <h2>{{this.content}}</h2>
+<div class="main-container">
+
+
+  <div class="welcome-label">
+      <h1>Bekijk hier u feedback</h1>
     </div>
-  </li>
-{{/each}}
+
+            <div class="detail-card">
+                <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>Je hebt erg goede punten ons team docenten zijn trots ga zo door!</h3>
+                    </a>
+                </div>
+                <div class="detail-card--information">
+                   
+                    <div class="detail-card--text">
+                        {{!-- <p>{{ meta.firstname }} {{ meta.lastname }} </p> --}}
+                    </div>
+                </div>
+            </div>
+
+
+  </div>
 
 </div>

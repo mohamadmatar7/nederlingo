@@ -1,0 +1,56 @@
+<div class="container">
+
+   {{>sidebar_leerling}}
+
+<div class="main-container">
+
+
+  <div class="welcome-label">
+      <h1>Bekijk en meld hier u afwezigheden</h1>
+    </div>
+
+            <div class="detail-card">
+                <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>Afwezigheidsformulier</h3>
+                    </a>
+                </div>
+                <div class="detail-card--information">
+                   
+     <div class="absences-container">
+        <form>
+
+            <div class="input-wrapper">
+
+            <div class="dates">
+            <label for="start-date">Afwezig van:</label>
+            <input type="date" name="start-date" required>
+
+            <label for="end-date">Afwezig tot en met:</label>
+            <input type="date" name="end-date" required>
+            </div>
+
+            <div>
+            <label for="reason">Reden:</label>
+            <select name="reason" required>
+                <option value="">-- Kies een reden --</option>
+                <option value="ziekte">Ziekte</option>
+                <option value="ongeval">Ongeval</option>
+            </select>
+            </div>
+
+            </div>
+
+
+
+            <button class="button-base" type="submit">Verstuur</button>
+        </form>
+    </div>
+
+                </div>
+            </div>
+
+
+  </div>
+
+</div>
