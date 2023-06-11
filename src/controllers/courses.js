@@ -5,11 +5,18 @@ export const courses = async (req, res) => {
   const meta = await metaRepo.findOne({
     where: { id: req.user.id },
   });
+  const userRepo = DataSource.getRepository("User");
+  const user = await userRepo.findOne({
+    where: { id: req.body.id }, relations: ["classrooms", "classrooms.subjects"],
+  });
+  const oneClass = user.classrooms;
+  // const subjects = req.user.classrooms.subjects
 
   res.render("vakkenleerling", {
     actSidebar: "vakken",
     user: req.user,
     meta: meta,
     courses: req?.classrooms,
+    class: oneClass
   });
 };

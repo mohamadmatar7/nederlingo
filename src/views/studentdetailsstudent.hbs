@@ -1,0 +1,44 @@
+<div class="container">
+
+    {{>sidebar_directeur}}
+
+
+    <div class="main-container dossier">
+
+
+        <div class="welcome-label">
+            <h1>Dossier!</h1>
+        </div>
+
+        <div class="container-dossier">
+
+            <div class="detail-card">
+                <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>Personalia</h3>
+                    </a>
+                </div>
+                <div class="detail-card--information">
+                    <div class="detail-card--profile-picture">
+                        <img src="{{ meta.avatar }}" alt="profile picture">
+                    </div>
+                    <div class="detail-card--text">
+                        <strong>Naam:</strong> <span>{{ meta.firstname }} {{ meta.lastname }} </span>
+                        <strong>Klas:{{#each classrooms}}
+                            <span>{{ this.label }}</span>
+                        {{/each}}</strong>
+                        <strong>Telefoonnummer:</strong> <span>{{ meta.phone }} </span>
+                        <strong>Adres:</strong> <span>{{ meta.address }} </span>
+                        <strong>Geboortedatum/plaats:</strong> <span>{{ meta.birthday }}, {{ meta.birthplace }} </span>
+                        <strong>Nationaliteit:</strong> <span>{{ meta.nationality }} </span>
+                        <strong>Geslacht:</strong> <span>{{ meta.gender }} </span>
+                        <strong>Ouders/Voogd:</strong> <span>{{ meta.parent }} </span>
+                        <strong>Bankvoorkeur:</strong> <span>{{ meta.bankpreference }}</span>
+                        <strong>Vervoer:</strong> <span>{{ meta.transport }} </span>
+                        <strong>Burgelijke staat:</strong> <span>{{ meta.family }} </span>
+                        <strong>Religie:</strong> <span>{{ meta.religion }} </span>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

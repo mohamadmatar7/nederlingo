@@ -1,0 +1,36 @@
+<div class="container">
+
+
+   {{>sidebar_leerling}}
+   <div class="column-class">
+      <div class="container-students">
+    <h1>Leerkrachten</h1>
+<ul class="students-list">
+  {{#each classroomTeacher.users}}
+    <li>
+      <a class="link-student" href="/person/{{this.id}}">
+        <img src="{{this.meta.avatar}}" alt="">
+        {{this.meta.firstname}} {{this.meta.lastname}}
+      </a>
+
+
+    </li>
+  {{/each}}
+</ul>
+
+</div>
+   <div class="container-students">
+    <h1>Studenten</h1>
+<ul class="students-list">
+  {{#each classroomStudents.users}}
+    <li>
+      <a class="link-student" href="/person/{{this.id}}">
+        <img src="{{this.meta.avatar}}" alt="">
+        {{this.meta.firstname}} {{this.meta.lastname}}
+      </a>
+    </li>
+  {{/each}}
+</ul>
+</div>
+</div>
+</div>

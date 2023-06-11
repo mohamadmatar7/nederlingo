@@ -49,12 +49,12 @@ export const getSubject = async (req, res, next) => {
     // get the repository
     const subjectRepository = DataSource.getRepository("Subject");
 
-    res.status(200).json(
-      await subjectRepository.findOne({
+      const subject= await subjectRepository.findOne({
         where: { id: req.params.id },
-        relations: ["users"],
+        relations: ["classrooms", "classrooms.users"],
       })
-    );
+    req.subjects = subject;
+    next();
   } catch (e) {
     next(e.message);
   }
@@ -81,5 +81,30 @@ export const postSubject = async (req, res, next) => {
     res.redirect("/allevakken")
   } catch (e) {
     next(e.message);
+  }
+};
+
+
+export const AddSubjectToClass = async (req, res, next) => {
+  try {
+    const subjectRepository = DataSource.getRepository("Subject");
+    const classroomRepository = DataSource.getRepository("Classroom");
+    const { subjectId, classId } = req.body;
+
+    const subject = await subjectRepository.findOneBy({ id: subjectId });
+    const classroom = await classroomRepository.findOne({
+      where: { id: classId },
+      relations: ["subjects"],
+    });
+    if (!subject || !classroom) throw new Error("Subject or classroom not found");
+    if (classroom.subjects) {
+      classroom.subjects.push(subject);
+    } else {
+      classroom.subjects = [subject];
+    }
+    await classroomRepository.save(classroom);
+    return res.status(200).json(classroom);
+  } catch (e) {
+    next(e);
   }
 };

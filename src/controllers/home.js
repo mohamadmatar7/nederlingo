@@ -24,6 +24,10 @@ export const home = async (req, res) => {
   });
   const userRole = req.user.role.label;
 
+  const oneClass = user.classrooms;
+
+  const subjects = user.classrooms.subjects;
+
   if (userRole === "Lesgever") {
     res.render("lesgever", {
       user: user,
@@ -58,5 +62,7 @@ export const home = async (req, res) => {
   res.render("home", {
     user: req.user,
     meta: meta,
+    class: oneClass,
+    subjects: subjects
   });
 };

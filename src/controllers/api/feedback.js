@@ -22,12 +22,8 @@ export const getAllFeedback = async (req, res, next) => {
             where: { id: req.params.id },
             relations: ["user"],
           });
-          if (feedback) {
             req.feedback = feedback;
             next();
-          } else {
-            res.status(404).json({ error: "Feedback not found" });
-          }
         } catch (e) {
           next(e.message);
         }

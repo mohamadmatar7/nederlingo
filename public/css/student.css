@@ -27,6 +27,11 @@ body {
   align-items: baseline;
 }
 
+.contain {
+  margin: 0 auto;
+  width: 80%;
+}
+
 .card-container {
   display: flex;
   gap: 2rem;

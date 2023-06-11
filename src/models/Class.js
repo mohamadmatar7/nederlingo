@@ -35,9 +35,20 @@ export default new EntitySchema({
     },
     subjects: {
       target: "Subject",
-      type: "one-to-many",
-      inverseSide: "classroom",
+      type: "many-to-many",
       cascade: true,
+      inverseSide: "classroom",
+      joinTable: {
+        name: "subjects_classes",
+        joinColumn: {
+          name: "class_id",
+          referencedColumnName: "id",
+        },
+        inverseJoinColumn: {
+          name: "subject_id",
+          referencedColumnName: "id",
+        },
+      },
     },
     attendances: {
       target: "Attendance",

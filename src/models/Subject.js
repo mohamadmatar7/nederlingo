@@ -4,7 +4,7 @@ const { EntitySchema } = typeorm;
 
 export default new EntitySchema({
   name: "Subject",
-  tableName: "subjects",
+  tableName: "subject",
   columns: {
     id: {
       primary: true,
@@ -33,13 +33,21 @@ export default new EntitySchema({
     //         },
     //     },
     // },
-    classroom: {
+    classrooms: {
       target: "Classroom",
-      type: "many-to-one",
-      inverseSide: "subjects",
-      joinColumn: {
-        name: "class_id",
-        onDelete: "CASCADE",
+      type: "many-to-many",
+      cascade: true,
+      inverseSide: "subject",
+      joinTable: {
+        name: "subjects_classes",
+        joinColumn: {
+          name: "subject_id",
+          referencedColumnName: "id",
+        },
+        inverseJoinColumn: {
+          name: "class_id",
+          referencedColumnName: "id",
+        },
       },
     },
   },

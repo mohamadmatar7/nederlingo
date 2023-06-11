@@ -578,3 +578,14 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.list-classes {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.list-classes li {
+  border: 1px solid;
+  padding: 0.5rem;
+}

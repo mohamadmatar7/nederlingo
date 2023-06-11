@@ -10,20 +10,15 @@
     </div>
 
             <div class="detail-card">
-                <div class="detail-card--label">
-                    <a href="/details">
-                        <h3>Je hebt erg goede punten ons team docenten zijn trots ga zo door!</h3>
-                    </a>
-                </div>
                 <div class="detail-card--information">
-                   
+                    {{#each feedback}}
+                   {{this.content}}
+                   {{/each}}
                     <div class="detail-card--text">
                         {{!-- <p>{{ meta.firstname }} {{ meta.lastname }} </p> --}}
                     </div>
                 </div>
             </div>
-
-
   </div>
 
 </div>

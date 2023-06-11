@@ -24,7 +24,7 @@ export const getClasses = async (req, res, next) => {
   
       const classroom = await classRepository.findOne({
         where: { id: req.params.id },
-        relations: ["users"],
+        relations: ["users", "users.meta"],
       });
   
       if (!classroom) {
