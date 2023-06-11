@@ -18,7 +18,7 @@ export default new EntitySchema({
       cascade: true,
       inverseSide: "students_present",
     },
-    students: {
+    student: {
         target: "User",
         type: "many-to-one",
         joinColumn: true,

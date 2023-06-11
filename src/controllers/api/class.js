@@ -59,7 +59,7 @@ export const postClass = async (req, res, next) => {
         const classRepository = DataSource.getRepository("Classroom");
         const classObj = req.body;
         const newClass = await classRepository.save(classObj);
-        res.status(200).json(newClass);
+        res.redirect("/alleklassen")
     } catch (e) {
         next(e.message);
     }

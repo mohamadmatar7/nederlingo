@@ -191,7 +191,7 @@ app.get("/api/users/firstname/:firstname", getUserByFirstName);
 app.get("/api/classes", getClasses);
 app.get("/api/classes/:id", getClass);
 app.delete("/api/classes/:id", deleteClass);
-app.post("/api/classes", postClass);
+app.post("/classes", postClass);
 app.put("/api/classes/:id", updateClass);
 
 //Subjects routes
@@ -199,7 +199,7 @@ app.get("/api/subjects", getSubjects);
 app.get("/api/allsubjects", getSubjectsP);
 app.get("/api/subjects/:id", getSubject);
 app.delete("/api/subjects/:id", deleteSubject);
-app.post("/api/subjects", postSubject);
+app.post("/subjects", postSubject);
 app.post("/attendance/:id", postAttendance);
 
 //Feedbacks routes

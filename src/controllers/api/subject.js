@@ -78,7 +78,7 @@ export const postSubject = async (req, res, next) => {
     const subjectRepository = DataSource.getRepository("Subject");
     const subject = await subjectRepository.create(req.body);
     await subjectRepository.save(subject);
-    res.status(200).json(subject);
+    res.redirect("/allevakken")
   } catch (e) {
     next(e.message);
   }

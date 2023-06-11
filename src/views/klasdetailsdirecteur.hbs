@@ -45,101 +45,52 @@
 </div>
 </div>
 
-<style>
-
-  /* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-</style>
-
 <script>
   function confirmDelete() {
     return confirm("Weet je zeker dat je deze student wilt uitschrijven?");
   }
-  
-  const toggles = document.querySelectorAll('.toggleStatus');
-  toggles.forEach(toggle => {
-    const userId = toggle.dataset.id;
+const toggles = document.querySelectorAll('.toggleStatus');
+
+toggles.forEach(toggle => {
+  const userId = toggle.dataset.id;
+    console.log("it's here", userId);
+
+  const isChecked = localStorage.getItem(`attendance_${userId}`) === 'true';
+
+  toggle.checked = isChecked;
+
+  toggle.addEventListener('change', async (e) => {
+    const isChecked = toggle.checked;
+    const status = isChecked ? 'present' : 'absent';
+
+    const currentDate = new Date().toISOString().split('T')[0];
+
     const data = {
-      status: 'present',
-      userId: userId
+      status: status,
+      date: currentDate
     };
 
-    toggle.addEventListener('change', (e) => {
-      alert('je hebt aanwezigheid veranderd naar ' + toggle.checked);
-      const response = fetch(`/attendance/${userId}`, {
+    try {
+      const response = await fetch(`/attendance/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: {
-          status: toggle.checked ? 'present' : 'absent',
-          userId: userId
-        }
-      }).then((res) => res.json())
-      .then(data => {
-        console.log(data);
-      })
-    });
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        const updatedAttendance = await response.json();
+        console.log(updatedAttendance);
+      } else {
+        console.log('Attendance update failed');
+      }
+    } catch (error) {
+      console.error('An error occurred during the attendance update:', error);
+    }
+
+    localStorage.setItem(`attendance_${userId}`, isChecked);
   });
+});
 
 </script>
