@@ -16,12 +16,17 @@ export const subjectP = async (req, res) => {
     const allclassrooms = await classRepo.find({
         relations: ["users", "users.meta"]
     });
+
+    const certainClass = await subjectRepo.findOne({
+      where: {id: req.params.id}, relations: ["classrooms", "classrooms.users"]
+  });
   
     res.render("vakdetailsdirecteur", {
       actSidebar: "Klassen",
       user: req.user,
       meta: meta,
       allclassrooms: allclassrooms,
+      certainClass: certainClass,
       subject: subjects
     });
   };
