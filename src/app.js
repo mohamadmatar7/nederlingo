@@ -184,7 +184,7 @@ app.post("/api/users/:id", multer().single("avatar"), saveAvatar, postAvatar);
 app.put("/users/:id", updateUser);
 app.post("/api/users/:id", multer().single("avatar"), saveAvatar, postAvatar);
 app.put("/api/users/:id", updateUser);
-app.get("/api/users/firstname/:firstname", getUserByFirstName);
+app.get("/users/firstname/:firstname", getUserByFirstName);
 
 //Classes routes
 app.get("/api/classes", getClasses);

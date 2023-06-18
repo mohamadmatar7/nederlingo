@@ -48,7 +48,7 @@ document.getElementById('formSearch').addEventListener('submit', function(event)
 
   const searchValue = document.getElementById('searchUser').value; // Get the search query from the input field
 
-  fetch('http://localhost:5000/api/users/firstname/' + (searchValue))
+  fetch('/users/firstname/' + (searchValue))
     .then(function(response) {
       if (response.ok) {
         return response.json();
