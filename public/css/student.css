@@ -77,6 +77,11 @@ body {
   margin: 0 auto;
 }
 
+.icon-card--container {
+  display: flex;
+  gap: 2rem;
+}
+
 .icon-card {
   width: 100%;
   background-color: var(--blue--main);
@@ -87,6 +92,12 @@ body {
   justify-content: center;
   padding: 2rem;
   flex: 1 0 calc(100% / 3 - var(--gap--card));
+}
+
+.overview_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .icon-card--label {
@@ -322,6 +333,7 @@ h3 {
   margin-left: 1rem;
   object-fit: cover;
   width: 36px;
+  border-radius: 50%;
 }
 
 .sidebar__logout .btn {

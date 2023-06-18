@@ -1,0 +1,46 @@
+<div class="container">
+
+   {{>sidebar_begeleider}}
+
+<div class="main-container">
+
+
+  <div class="welcome-label">
+    <h1>Cijfers van leerlingen bekijken van het vak Nederlands algemeen </h1>
+    </div>
+                   <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>overzicht</h3>
+                    </a>
+                </div>
+
+
+
+            <div class="detail-card">
+                <div class="detail-card--information">
+                    {{#each feedback}}
+                   {{this.content}}
+                   {{/each}}
+
+
+                    
+                   <div class="overview_container">
+                        <div class="left">
+                            <h3>Studentennaam</h3>
+                            <p>Studentennaam</p>
+                        </div>
+
+                            <div class="right">
+                                <h3>Overzicht</h3>
+                                <p>button</p>
+                           </div>
+                   </div>
+
+                    
+                    
+                </div>
+            </div>
+  </div>
+
+</div>
+    </div>

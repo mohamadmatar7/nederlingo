@@ -5,7 +5,7 @@
     <li class="sidebar__item">
       <img src="{{user.meta.avatar}}" alt="" />
       <div class="sidebar_personalia">
-        <strong>{{ user.meta.firstname }} {{user.lastname}}</strong>
+        <strong>{{ user.meta.firstname }} {{ user.meta.lastname }}</strong>
         <strong>
             {{user.role.label}}
         </strong>
@@ -43,7 +43,7 @@
       </a>
     </li>
     <li
-    {{#ifEquals 'dossier' actSidebar }}
+    {{#ifEquals 'Klassen' actSidebar }}
       class="sidebar__item active"
       {{ else }}
       class="sidebar__item"

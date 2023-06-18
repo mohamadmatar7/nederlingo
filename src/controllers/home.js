@@ -30,6 +30,7 @@ export const home = async (req, res) => {
 
   if (userRole === "Lesgever") {
     res.render("lesgever", {
+      actSidebar: "overzicht",
       user: user,
       Class: Class,
       classes: classes,
@@ -40,6 +41,7 @@ export const home = async (req, res) => {
 
   if (userRole === "Begeleider") {
     res.render("begeleider", {
+      actSidebar: "overzicht",
       user: user,
       Class: Class,
       classes: classes,
@@ -50,6 +52,7 @@ export const home = async (req, res) => {
 
   if (userRole === "Directeur") {
     res.render("directeur", {
+      actSidebar: "overzicht",
       user: user,
       classrooms: Class,
       classes: classes,
@@ -61,8 +64,9 @@ export const home = async (req, res) => {
   // render the home page
   res.render("home", {
     user: req.user,
+    actSidebar: "overzicht",
     meta: meta,
     class: oneClass,
-    subjects: subjects
+    subjects: subjects,
   });
 };

@@ -1,15 +1,17 @@
 <div class="container">
 
-    {{>sidebar_leerling}}
+    {{>sidebar_begeleider}}
+
 
     <div class="main-container dossier">
 
 
         <div class="welcome-label">
-            <h1>Bekijk je dossier!</h1>
+            <h1>Dossier!</h1>
         </div>
 
         <div class="container-dossier">
+
             <div class="detail-card">
                 <div class="detail-card--label">
                     <a href="/details">
@@ -38,47 +40,59 @@
                     </div>
                 </div>
             </div>
-            <form onsubmit="updateUser(event)">
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" value="{{ user.password }}" />
-  </div>
-  <div class="form-actions">
-    <button type="submit" class="save-button">Save Changes</button>
-  </div>
-</form>
+
+                            <div class="detail-card">
+                <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>Afwezigheden</h3>
+                    </a>
+                </div>
+                <div class="detail-card--information">
+                    <div class="detail-card--text">
+                {{#each absences}}
+                <ul>
+                    <li><strong>Reden:</strong> {{this.reason}} <strong>Datum:</strong> {{this.date}}</li>
+                </ul>
+                {{/each}}
+                    </div>
+                </div>
+            </div>
 
     </div>
 </div>
 
-    {{>updateImage}}
+<form action="/feedback/{{ person.id }}" method="post">
+    <input name="feedback"></input>
+    <button id="add" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">Feedback sturen</button>
+</form>
 
 
 <script>
-    function updateUser(event) {
+    // function add user to classroom
+    
+const addFeedback = document.getElementById('add');
+addFeedback.addEventListener('click', function(event) {
   event.preventDefault();
-  const userId = "{{ user.id }}";
-  const password = document.getElementById("password").value;
-
-  fetch(`/users/${userId}`, {
-    method: "put",
-    body: JSON.stringify({
-      password: password
-    }),
-    headers: {
-      "Content-Type": "application/json"
-    }
+  const userId = addFeedback.getAttribute('data-id');
+  const result = document.querySelector('input[name="feedback"]').value;
+  console.log(result);
+  console.log(userId);
+  fetch(`/feedback/${userId}`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          content: result,
+      })
   })
   .then(response => response.json())
   .then(data => {
-    // handle success response from the server
-    window.location.reload();
-    console.log(data);
+      window.location.reload();
   })
-  .catch(error => {
-    // handle error response from the server
-    console.error(error);
+  .catch((error) => {
+      console.error('Error:', error);
   });
-}
+});
 
 </script>
