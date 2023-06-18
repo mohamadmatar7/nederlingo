@@ -1,0 +1,98 @@
+<div class="container">
+
+    {{>sidebar_begeleider}}
+
+
+    <div class="main-container dossier">
+
+
+        <div class="welcome-label">
+            <h1>Dossier!</h1>
+        </div>
+
+        <div class="container-dossier">
+
+            <div class="detail-card">
+                <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>Personalia</h3>
+                    </a>
+                </div>
+                <div class="detail-card--information">
+                    <div class="detail-card--profile-picture">
+                        <img src="{{ meta.avatar }}" alt="profile picture">
+                    </div>
+                    <div class="detail-card--text">
+                        <strong>Naam:</strong> <span>{{ meta.firstname }} {{ meta.lastname }} </span>
+                        <strong>Klas:{{#each classrooms}}
+                            <span>{{ this.label }}</span>
+                        {{/each}}</strong>
+                        <strong>Telefoonnummer:</strong> <span>{{ meta.phone }} </span>
+                        <strong>Adres:</strong> <span>{{ meta.address }} </span>
+                        <strong>Geboortedatum/plaats:</strong> <span>{{ meta.birthday }}, {{ meta.birthplace }} </span>
+                        <strong>Nationaliteit:</strong> <span>{{ meta.nationality }} </span>
+                        <strong>Geslacht:</strong> <span>{{ meta.gender }} </span>
+                        <strong>Ouders/Voogd:</strong> <span>{{ meta.parent }} </span>
+                        <strong>Bankvoorkeur:</strong> <span>{{ meta.bankpreference }}</span>
+                        <strong>Vervoer:</strong> <span>{{ meta.transport }} </span>
+                        <strong>Burgelijke staat:</strong> <span>{{ meta.family }} </span>
+                        <strong>Religie:</strong> <span>{{ meta.religion }} </span>
+                    </div>
+                </div>
+            </div>
+
+                            <div class="detail-card">
+                <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>Afwezigheden</h3>
+                    </a>
+                </div>
+                <div class="detail-card--information">
+                    <div class="detail-card--text">
+                {{#each absences}}
+                <ul>
+                    <li><strong>Reden:</strong> {{this.reason}} <strong>Datum:</strong> {{this.date}}</li>
+                </ul>
+                {{/each}}
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
+
+<form action="/feedback/{{ person.id }}" method="post">
+    <input name="feedback"></input>
+    <button id="add" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">Feedback sturen</button>
+</form>
+
+
+<script>
+    // function add user to classroom
+    
+const addFeedback = document.getElementById('add');
+addFeedback.addEventListener('click', function(event) {
+  event.preventDefault();
+  const userId = addFeedback.getAttribute('data-id');
+  const result = document.querySelector('input[name="feedback"]').value;
+  console.log(result);
+  console.log(userId);
+  fetch(`/feedback/${userId}`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          content: result,
+      })
+  })
+  .then(response => response.json())
+  .then(data => {
+      window.location.reload();
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+});
+
+</script>

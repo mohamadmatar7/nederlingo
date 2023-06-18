@@ -1,0 +1,20 @@
+<div class="container">
+
+
+   {{>sidebar_begeleider}}
+
+<div class="main-container">
+
+  <div class="card-container">
+
+{{#each classes}}
+  <li class="icon-card">
+    <a href="/begeleider_klassen/{{this.id}}" class="icon-card--label">
+      <h2>{{this.label}}</h2>
+    </a>
+    <div class="icon-card--img">
+      <img src="/images/icons/vakken.png" alt="vakken" />
+    </div>
+  </li>
+{{/each}}
+</div>

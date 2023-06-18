@@ -1,0 +1,30 @@
+<div class="container">
+    {{>sidebar_begeleider}}
+    
+    <div class="main-container dossier">
+        <div class="welcome-label">
+            <h1>Bekijk je dossier!</h1>
+        </div>
+        <div class="container-dossier">
+            <div class="detail-card">
+                <div class="detail-card--label">
+                    <a href="/details">
+                        <h3>Personalia</h3>
+                    </a>
+                </div>
+                <div class="detail-card--information">
+                    <div class="detail-card--profile-picture">
+                        <img src="{{ meta.avatar }}" alt="profile picture">
+                    </div>
+                    <div class="detail-card--text">
+                        <p>{{ meta.firstname }} {{ meta.lastname }} </p>
+                        <p>{{ meta.birthday }} {{ meta.birthplace }} </p>
+                        <p>{{ meta.nationality }} </p>
+                        <p>{{ meta.gender }} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-card">
+            </div>
+        </div>
+    </div>
