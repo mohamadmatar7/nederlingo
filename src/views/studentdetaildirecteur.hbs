@@ -1,6 +1,13 @@
 <div class="container">
-
+{{#ifEquals user.role.label 'Directeur'}}
     {{>sidebar_directeur}}
+{{/ifEquals}}
+{{#ifEquals user.role.label 'Begeleider'}}
+    {{>sidebar_begeleider}}
+{{/ifEquals}}
+{{#ifEquals user.role.label 'Lesgever'}}
+    {{>sidebar_lesgever}}
+{{/ifEquals}}
 
 
     <div class="main-container dossier">
@@ -62,7 +69,7 @@
 </div>
 
 
-
+{{#ifEquals user.role.label 'Directeur'}}
 <div class="test">
     <select name="classrooms">classrooms: 
     {{#each allclassrooms}}
@@ -71,10 +78,12 @@
 </select>
 <button id="test" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">add gebruiker</button>
 </div>
+{{/ifEquals}}
 <form action="/feedback/{{ person.id }}" method="post">
     <input name="feedback"></input>
     <button id="add" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">Feedback sturen</button>
 </form>
+{{#ifEquals user.role.label 'Directeur'}}
 <div class="test">
     <select name="classroomChange">
     {{#each allclassrooms}}
@@ -83,6 +92,7 @@
 </select>
 <button id="change" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">klas veranderen</button>
 </div>
+{{/ifEquals}}
 
 
 <script>

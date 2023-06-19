@@ -1,7 +1,7 @@
 <div class="container">
 
 
-   {{>sidebar_directeur}}
+   {{>sidebar_lesgever}}
 
 <div class="main-container">
 
@@ -11,14 +11,11 @@
   <li class="icon-card">
     <a href="/alleklassen/{{this.id}}" class="icon-card--label">
       <h2>{{this.label}}</h2>
-          <div class="icon-card--img">
+    </a>
+    <div class="icon-card--img">
       <img src="/images/icons/vakken.png" alt="vakken" />
     </div>
-    </a>
   </li>
 {{/each}}
-<form action="/classes" method="post">
-  <input type="text" name="label" placeholder="Klasnaam">
-  <input type="submit" value="Klas toevoegen">
-</form>
+
 </div>

@@ -23,7 +23,7 @@ export const feedbackR = async (req, res) => {
   console.log(feed)
 
   res.render("feedback", {
-    actSidebar: "dossier",
+    actSidebar: "feedback",
     user: req.user,
     meta: meta,
     feedback: feed

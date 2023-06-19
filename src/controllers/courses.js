@@ -14,7 +14,7 @@ export const courses = async (req, res) => {
   // const subjects = req.user.classrooms.subjects
 
   res.render("vakkenleerling", {
-    actSidebar: "Klassen",
+    actSidebar: "vakken",
     user: req.user,
     meta: meta,
     courses: req?.classrooms,

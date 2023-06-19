@@ -1,90 +1,31 @@
 <div class="container">
    {{>sidebar_begeleider}}
    <div class="main-container">
-  <h1>👋🏼 Hey welkom begeleider{{ meta.firstname }}</h1>
+  <h1>👋🏼 Hey welkom {{ meta.firstname }}</h1>
 
 <div class="icon-card--container">
- <div class="icon-card">
+ <a href="/begeleider_vakken" class="icon-card">
   <div class="icon-card--label">
-    <a href="/begeleider_vakken">
       <h3>Vakken</h3>
-    </a>
   </div>
   <div class="icon-card--img">
     <img src="/images/icons/vakken.png" alt="vakken" />
   </div>
-</div>
-<div class="icon-card">
+</a>
+<a href="/begeleider_klassen" class="icon-card">
   <div class="icon-card--label">
-    <a href="/begeleider_klassen">
       <h3>Klassen</h3>
-    </a>
   </div>
   <div class="icon-card--img">
     <img src="/images/icons/klas.png" alt="vakken" />
   </div>
+</a>
 </div>
-</div>
 
 
 
-<div class="search">
-<h2>De gebruikers</h2>
-<form action="#" method="post" id="formSearch">
-  <label for="searchUser"></label>
-  <input id="searchUser" name="searchUser" type="text" placeholder="Search">
-  <button type="submit">Search</button>
-</form>
-
-<ul id="result" class="search__result"></ul>
-</div>
+{{>search}}
 
 </div>
 </div>
 
-<script>
-document.getElementById('formSearch').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent the form from submitting normally
-
-  const searchValue = document.getElementById('searchUser').value; // Get the search query from the input field
-
-  fetch('/users/firstname/' + (searchValue))
-    .then(function(response) {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error('Error: ' + response.status);
-      }
-    })
-    .then(function(data) {
-
-      // console.log(data); 
-      renderUsers(data); 
-    })
-    .catch(function(error) {
-      // console.log(error); // Handle any errors
-    });
-});
-
-async function renderUsers(users) {
-  const $result = document.getElementById("result");
-  $result.innerHTML = users
-    .map((user) => {
-      return `
-      <li class="card" data-username="${user.id}">
-        <a href="/user/${user.id}">
-        <img src="${user.meta.avatar}" alt="">
-        <h4>${user.meta.firstname} ${user.meta.lastname}</h4>
-        <h5>${user.role.label}</h5>
-        <h6>${user.classrooms.map(
-          (clas) => {
-            return `${clas.label}`;
-          }
-        ).join("")}</h6></a></li>
-      `;
-    })
-    .join("");
-}
-
-
-</script>

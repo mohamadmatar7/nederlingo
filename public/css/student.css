@@ -75,6 +75,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  gap: 24px;
 }
 
 .icon-card--container {
@@ -89,9 +90,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
-  padding: 2rem;
-  flex: 1 0 calc(100% / 3 - var(--gap--card));
+
 }
 
 .overview_container {
@@ -101,7 +100,11 @@ body {
 }
 
 .icon-card--label {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 2rem;
 }
 
 .icon-card--img img {

@@ -22,9 +22,9 @@ export const absenceR = async (req, res) => {
   const absence = user.absences;
 
   res.render("afwezigheden", {
-    actSidebar: "dossier",
+    actSidebar: "afwezigheden",
     user: req.user,
     meta: meta,
-    absences: absence
+    absences: absence,
   });
 };

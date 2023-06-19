@@ -94,6 +94,7 @@ import { classesM } from "./controllers/classes_mentor.js";
 import { fileM } from "./controllers/file_mentor.js";
 import { classM } from "./controllers/class_mentor.js";
 import { userM } from "./controllers/student_file_mentor.js";
+import { classesT } from "./controllers/classes_teacher.js";
 
 const app = express();
 app.use(express.static("public"));
@@ -132,6 +133,7 @@ app.get("/login", login);
 app.get("/allevakken", jwtAuth, getSubjectsP, coursesP);
 app.get("/begeleider_vakken", jwtAuth, getSubjectsP, subjectsM);
 app.get("/alleklassen", jwtAuth, getClasses, classesP);
+app.get("/lesgever_klassen", jwtAuth, getUser, classesT);
 app.get("/begeleider_klassen", jwtAuth, getClasses, classesM);
 app.get("/afwezigheden", jwtAuth, getAbsence, absenceR);
 app.get("/alleklassen/:id", jwtAuth, getClass, classP);

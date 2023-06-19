@@ -1,15 +1,26 @@
 <div class="container">
+    {{#ifEquals user.role.label 'Directeur'}}
         {{>sidebar_directeur}}
+    {{/ifEquals}}
+    {{#ifEquals user.role.label 'Begeleider'}}
+                {{>sidebar_begeleider}}
+    {{/ifEquals}}
 
     <div class="contain">
         <h1>Klassen</h1>
     <ul class="list-classes">
             {{#each certainClass.classrooms}}
             <li>
+                {{#ifEquals ../user.role.label 'Directeur'}}
         <a href="/alleklassen/{{ this.id }}">{{this.label}}</a>
+        {{/ifEquals}}
+        {{#ifEquals ../user.role.label 'Begeleider'}}
+        <a href="/begeleider_klassen/{{ this.id }}">{{this.label}}</a>
+        {{/ifEquals}}
             </li>
                 {{/each}}
     </ul>
+    {{#ifEquals user.role.label 'Directeur'}}
         <div class="test">
     <select name="classrooms">
     {{#each allclassrooms}}
@@ -18,6 +29,7 @@
 </select>
 <button id="test" type="submit" class="save-button add-user-to-class" data-id="{{ subject.id }}">Vak toevoegen aan klas</button>
 </div>
+{{/ifEquals}}
 </div>
 </div>
 

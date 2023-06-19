@@ -1,8 +1,13 @@
 <div class="container">
 
-
+{{#ifEquals user.role.label 'Directeur'}}
    {{>sidebar_directeur}}
+{{/ifEquals}}
+{{#ifEquals user.role.label 'Lesgever'}}
+   {{>sidebar_lesgever}}
+{{/ifEquals}}
    <div class="column-class">
+    {{#ifEquals user.role.label 'Directeur'}}
       <div class="container-students">
     <h1>Leerkrachten</h1>
 <ul class="students-list">
@@ -12,15 +17,38 @@
         <img src="{{this.meta.avatar}}" alt="">
         {{this.meta.firstname}} {{this.meta.lastname}}
       </a>
-<form action="/users/{{this.id}}?_method=DELETE" method="post" onsubmit="return confirmDelete()">
-  <input class="btn-out" type="submit" value="Uitschrijven">
-</form>
-
+{{#ifEquals ../user.role.label 'Directeur'}}
+      <form action="/users/{{this.id}}?_method=DELETE" method="post" onsubmit="return confirmDelete()">
+        <input class="btn-out" type="submit" value="Uitschrijven">
+      </form>
+{{/ifEquals}}
     </li>
   {{/each}}
 </ul>
 
 </div>
+{{/ifEquals}}
+{{#ifEquals user.role.label 'Begeleider'}}
+      <div class="container-students">
+    <h1>Leerkrachten</h1>
+<ul class="students-list">
+  {{#each classroomTeacher.users}}
+    <li>
+      <a class="link-student" href="/user/{{this.id}}">
+        <img src="{{this.meta.avatar}}" alt="">
+        {{this.meta.firstname}} {{this.meta.lastname}}
+      </a>
+{{#ifEquals ../user.role.label 'Directeur'}}
+      <form action="/users/{{this.id}}?_method=DELETE" method="post" onsubmit="return confirmDelete()">
+        <input class="btn-out" type="submit" value="Uitschrijven">
+      </form>
+{{/ifEquals}}
+    </li>
+  {{/each}}
+</ul>
+
+</div>
+{{/ifEquals}}
    <div class="container-students">
     <h1>Studenten</h1>
 <ul class="students-list">
@@ -31,13 +59,17 @@
         {{this.meta.firstname}} {{this.meta.lastname}}
       </a>
       <!-- Rectangular switch -->
+      {{#ifEquals ../user.role.label 'Lesgever'}}
       <label class="switch"> <!-- if present, add checked attribute to inputchecbkox -->
         <input data-id="{{this.id}}" type="checkbox" class="toggleStatus" name="status" value="present">
         <span class="slider"></span>
       </label>
+      {{/ifEquals}}
+           {{#ifEquals ../user.role.label 'Directeur'}}
       <form action="/users/{{this.id}}?_method=DELETE" method="post" onsubmit="return confirmDelete()">
         <input class="btn-out" type="submit" value="Uitschrijven">
       </form>
+{{/ifEquals}}
     </li>
   {{/each}}
 </ul>

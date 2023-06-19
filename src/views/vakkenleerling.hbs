@@ -1,5 +1,10 @@
  <div class="container">
+  {{#ifEquals user.role.label 'Leerling'}}
   {{>sidebar_leerling}}
+  {{/ifEquals}}
+  {{#ifEquals user.role.label 'Lesgever'}}
+    {{>sidebar_lesgever}}
+  {{/ifEquals}}
   <div class="main-container">
     <div class="welcome-label">
       <h1>Bekijk je vakken!</h1>

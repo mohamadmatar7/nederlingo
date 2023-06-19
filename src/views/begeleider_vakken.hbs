@@ -7,7 +7,7 @@
     <div class="card-container__3items">
       {{#each courses}}
       <li style="list-style: none;">
-        <div class="icon-card">
+        <a href="/vak/{{this.id}}" class="icon-card">
           <div class="icon-card--label">
             <h3>{{this.name}}</h3>
           </div>
@@ -16,7 +16,7 @@
           </div>
           <div class="icon-card--label">
           </div>
-        </div>
+        </a>
       </li>
       {{/each}}
     </div>
