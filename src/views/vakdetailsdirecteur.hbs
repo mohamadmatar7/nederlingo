@@ -21,20 +21,20 @@
                 {{/each}}
     </ul>
     {{#ifEquals user.role.label 'Directeur'}}
-        <div class="test">
+        <div class="container-sub">
     <select name="classrooms">
     {{#each allclassrooms}}
     <option value="{{ this.id }}">{{ this.label }}</option>
     {{/each}}
 </select>
-<button id="test" type="submit" class="save-button add-user-to-class" data-id="{{ subject.id }}">Vak toevoegen aan klas</button>
+<button id="addsubject" type="submit" class="save-button add-user-to-class button-base" data-id="{{ subject.id }}">Vak toevoegen aan klas</button>
 </div>
 {{/ifEquals}}
 </div>
 </div>
 
 <script>
-        const addClassroom = document.getElementById('test');
+        const addClassroom = document.getElementById('addsubject');
         addClassroom.addEventListener('click', function() {
         const classroomId = document.querySelector('select[name="classrooms"]').value;
         const subjectId = addClassroom.getAttribute('data-id');
