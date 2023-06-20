@@ -21,9 +21,7 @@
 
             <div class="detail-card">
                 <div class="detail-card--label">
-                    <a href="/details">
                         <h3>Personalia</h3>
-                    </a>
                 </div>
                 <div class="detail-card--information">
                     <div class="detail-card--profile-picture">
@@ -50,54 +48,51 @@
 
                             <div class="detail-card">
                 <div class="detail-card--label">
-                    <a href="/details">
                         <h3>Afwezigheden</h3>
-                    </a>
                 </div>
                 <div class="detail-card--information">
                     <div class="detail-card--text">
                 {{#each absences}}
-                <ul>
+                <ul class="absence-list">
                     <li><strong>Reden:</strong> {{this.reason}} <strong>Datum:</strong> {{this.date}}</li>
                 </ul>
                 {{/each}}
                     </div>
                 </div>
             </div>
-
-    </div>
-</div>
-
-
-{{#ifEquals user.role.label 'Directeur'}}
-<div class="test">
+            <div class="container-interactions">
+ {{#ifEquals user.role.label 'Directeur'}}
+<div class="addToClass">
     <select name="classrooms">classrooms: 
     {{#each allclassrooms}}
     <option value="{{ this.id }}">{{ this.label }}</option>
     {{/each}}
 </select>
-<button id="test" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">add gebruiker</button>
+<button id="addclass" type="submit" class="save-button add-user-to-class button-base" data-id="{{ person.id }}">Toevoegen aan klas</button>
 </div>
 {{/ifEquals}}
-<form action="/feedback/{{ person.id }}" method="post">
-    <input name="feedback"></input>
-    <button id="add" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">Feedback sturen</button>
-</form>
 {{#ifEquals user.role.label 'Directeur'}}
-<div class="test">
+<div class="changeclass">
     <select name="classroomChange">
     {{#each allclassrooms}}
     <option value="{{ this.id }}">{{ this.label }}</option>
     {{/each}}
 </select>
-<button id="change" type="submit" class="save-button add-user-to-class" data-id="{{ person.id }}">klas veranderen</button>
+<button id="change" type="submit" class="save-button add-user-to-class button-base" data-id="{{ person.id }}">Klas veranderen</button>
 </div>
 {{/ifEquals}}
+<form action="/feedback/{{ person.id }}" method="post">
+    <input class="feed-input" name="feedback"></input>
+    <button id="add" type="submit" class="save-button add-user-to-class button-base" data-id="{{ person.id }}">Feedback sturen</button>
+</form>
+            </div>
+    </div>
+</div>
 
 
 <script>
     // function add user to classroom
-    const addClassroom = document.getElementById('test');
+    const addClassroom = document.getElementById('addclass');
     addClassroom.addEventListener('click', function() {
         const classroomId = document.querySelector('select[name="classrooms"]').value;
         const userId = addClassroom.getAttribute('data-id');
@@ -173,25 +168,3 @@ addFeedback.addEventListener('click', function(event) {
 });
 
 </script>
-
- {{!-- <div class="news-card">
-             <div class="detail-card--label">
-               <a href="/details">
-                 <h3>Laatste aankondigingen deze maand</h3>
-               </a>
-        </div>
-                    
-                    
-                    <div class="news-card--information">
-                        <img src="/images//icons//megaphone.png" alt="megaphone">
-                     <p>Les Uitval</p>
-                     <p> De les van aanstaande maandag aanstaande valt uit vanwege ziekte...</p>
-                    </div>
-                    <div class="detail-card--text">
-                        <p>{{ meta.firstname }} {{ meta.lastname }} </p>
-                        <p>{{ meta.birthday }} {{ meta.birthplace }} </p>
-                        <p>{{ meta.nationality }} </p>
-                        <p>{{ meta.gender }} </p>
-                    </div>
-
-                </div> --}}

@@ -1,13 +1,13 @@
-<div class="test">
+<div class="img">
   <div class="edit-info-form">
-  <h3>Image</h3>
-  <form action="/api/users/{{ user.id }}" method="POST" enctype="multipart/form-data">
+  <h3>Foto veranderen</h3>
+  <form class="form-image" action="/api/users/{{ user.id }}" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="id" value="{{ user.id }}">
   <label for="avatar">
         <img class="avatar" src="{{ user.meta.avatar }}" alt="">
   </label>
-  <input type="file" name="avatar">
-  <button type="submit" class="save-button">Update Image</button>
+  <input class="uploader" type="file" name="avatar">
+  <button type="submit" class="save-button button-base">Update Image</button>
   </form>
 </div>
 </div>

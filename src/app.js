@@ -85,7 +85,6 @@ import { saveAvatar } from "./middleware/avatar.js";
 import { absenceR } from "./controllers/absences.js";
 import { feedback } from "./controllers/feedback.js";
 import { afwezigheden } from "./controllers/afwezigheden.js";
-import { details } from "./controllers/details.js";
 import { classStudent } from "./controllers/classstudent.js";
 import { userStudent } from "./controllers/filecolleague.js";
 import { subjectP } from "./controllers/subjectsprincipal.js";
@@ -167,7 +166,6 @@ app.get("/feedback", jwtAuth, feedback);
 app.get("/afwezigheden", jwtAuth, afwezigheden);
 
 // routings van dossier
-app.get("/details", jwtAuth, details);
 
 /**
  * API Routing

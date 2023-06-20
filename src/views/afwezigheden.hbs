@@ -1,7 +1,7 @@
 <div class="container">
 
    {{>sidebar_leerling}}
-
+<div class="cont-absence">
 {{#each absences}}
   <li class="icon-card">
     <div class="icon-card--label">
@@ -14,11 +14,13 @@
   </li>
 {{/each}}
 
-<form action="/absence" method="post">
+<form class="absence-form" action="/absence" method="post">
+<label>Afwezigheid melden
     <input type="hidden" name="user[id]" value="{{user.id}}">
     <input required name="content" placeholder="Afwezigheid reden"></input>
     <input required name="date" type="date"></input>
-    <button id="add" type="submit" class="save-button add-user-to-class">Afwezigheid bevestigen</button>
+    <button id="add" type="submit" class="save-button add-user-to-class button-base">Afwezigheid bevestigen</button>
+    </label>
 </form>
-
+</div>
 </div>

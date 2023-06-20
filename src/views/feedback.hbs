@@ -12,7 +12,11 @@
             <div class="detail-card">
                 <div class="detail-card--information">
                     {{#each feedback}}
-                   {{this.content}}
+                    <ul class="feed-list">
+                        <li>
+                            {{this.content}}
+                        </li>
+                    </ul>
                    {{/each}}
                     <div class="detail-card--text">
                         {{!-- <p>{{ meta.firstname }} {{ meta.lastname }} </p> --}}

@@ -12,9 +12,7 @@
         <div class="container-dossier">
             <div class="detail-card">
                 <div class="detail-card--label">
-                    <a href="/details">
                         <h3>Personalia</h3>
-                    </a>
                 </div>
                 <div class="detail-card--information">
                     <div class="detail-card--profile-picture">
@@ -40,25 +38,27 @@
             </div>
             <form onsubmit="updateUser(event)">
   <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" value="{{ user.password }}" />
+    <label for="password"></label>
+    <input class="pass" type="password" placeholder="Change password" id="password" name="password" value="{{ user.password }}" />
   </div>
   <div class="form-actions">
-    <button type="submit" class="save-button">Save Changes</button>
+    <button type="submit" class="button-base">Save Changes</button>
   </div>
 </form>
-
+    {{>updateImage}}
     </div>
 </div>
 
-    {{>updateImage}}
-
-
 <script>
-    function updateUser(event) {
+function updateUser(event) {
   event.preventDefault();
   const userId = "{{ user.id }}";
   const password = document.getElementById("password").value;
+
+  if (password.length < 8) {
+    alert("Password should be at least 8 characters long.");
+    return;
+  }
 
   fetch(`/users/${userId}`, {
     method: "put",
