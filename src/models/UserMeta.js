@@ -30,31 +30,24 @@ export default new EntitySchema({
     },
     birthplace: {
       type: "varchar",
-      nullable: true
     },
     parent: {
       type: "varchar",
-      nullable: true
     },
     family:{
       type: "varchar",
-      nullable: true
     },
     bankpreference: {
       type: "varchar",
-      nullable: true
     },
     transport: {
       type: "varchar",
-      nullable: true
     },
     gender: {
       type: "varchar",
-      nullable: true
     },
     religion: {
       type: "varchar",
-      nullable: true
     },
     phone: {
       type: "varchar",
