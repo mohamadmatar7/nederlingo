@@ -5,6 +5,7 @@ dotenv.config();
 import express from "express";
 import { create } from "express-handlebars";
 import bodyParser from "body-parser";
+import swaggerUi from 'swagger-ui-express';
 import cookieparser from "cookie-parser";
 import methodOverride from "method-override";
 
@@ -98,6 +99,9 @@ import { classesT } from "./controllers/classes_teacher.js";
 const app = express();
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+
+import swaggerDefinition from './docs/swagger.js';
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
 
 /*
  * Tell Express to use the Cookie Parser
